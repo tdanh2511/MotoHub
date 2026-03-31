@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuProfile"
+        android:title="Tài khoản" />
+    <item
+        android:id="@+id/menuAdmin"
+        android:title="Trang quản trị" />
+    <item
+        android:id="@+id/menuLogout"
+        android:title="Đăng xuất" />
+</menu>

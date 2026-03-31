@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    android:orientation="vertical"
+    android:background="#FFFFFF"
+    android:padding="12dp">
+
+    <ImageView
+        android:id="@+id/imgMotorbike"
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_bike_placeholder" />
+
+    <TextView
+        android:id="@+id/tvBikeName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:maxLines="2"
+        android:text="Tên xe"
+        android:textColor="#1F1F1F"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvBikeBrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="Hãng xe"
+        android:textColor="#777777"
+        android:textSize="13sp" />
+
+    <TextView
+        android:id="@+id/tvBikePrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="50.000.000 đ"
+        android:textColor="#D32F2F"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+</LinearLayout>
