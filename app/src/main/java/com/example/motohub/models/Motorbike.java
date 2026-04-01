@@ -7,6 +7,7 @@ public class Motorbike {
     private double price;
     private String image;
     private boolean featured;
+    private boolean favorite;
 
     public Motorbike() {
     }
@@ -18,6 +19,16 @@ public class Motorbike {
         this.price = price;
         this.image = image;
         this.featured = featured;
+    }
+
+    public Motorbike(int id, String name, String brand, double price, String image, boolean featured, boolean favorite) {
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.image = image;
+        this.featured = featured;
+        this.favorite = favorite;
     }
 
     public int getId() {
@@ -66,5 +77,13 @@ public class Motorbike {
 
     public void setFeatured(boolean featured) {
         this.featured = featured;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 }

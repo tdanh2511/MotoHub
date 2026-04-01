@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MotoHubDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "motohub.db";
-    public static final int DB_VERSION = 2;
+    public static final int DB_VERSION = 4;
 
     // Bang motorbikes
     public static final String TABLE_MOTORBIKES = "motorbikes";
@@ -27,6 +27,13 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
     public static final String COL_PASSWORD = "password";
     public static final String COL_FULLNAME = "fullname";
     public static final String COL_ROLE = "role";
+
+    // Bang favorites
+    public static final String TABLE_FAVORITES = "favorites";
+    public static final String COL_FAVORITE_ID = "id";
+    public static final String COL_FAVORITE_USER_ID = "user_id";
+    public static final String COL_FAVORITE_MOTORBIKE_ID = "motorbike_id";
+
     public MotoHubDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
@@ -57,6 +64,16 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
 
         db.execSQL(createUsersTable);
 
+        // Favorites table
+        String createFavoritesTable = "CREATE TABLE " + TABLE_FAVORITES + " ("
+                + COL_FAVORITE_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_FAVORITE_USER_ID + " INTEGER NOT NULL, "
+                + COL_FAVORITE_MOTORBIKE_ID + " INTEGER NOT NULL, "
+                + "UNIQUE(" + COL_FAVORITE_USER_ID + ", " + COL_FAVORITE_MOTORBIKE_ID + ")"
+                + ");";
+
+        db.execSQL(createFavoritesTable);
+
         // Seed data
         seedMotorbikes(db);
         seedUsers(db);
@@ -64,17 +81,16 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
 
     private void seedMotorbikes(SQLiteDatabase db) {
         db.execSQL("INSERT INTO motorbikes(name, brand, price, image, featured) VALUES" +
-                "('Honda SH 160i', 'Honda', 92000000, 'ic_bike_placeholder', 1)");
+                "('Honda SH 160i', 'Honda', 92756400, 'honda_sh_160i', 1)");
         db.execSQL("INSERT INTO motorbikes(name, brand, price, image, featured) VALUES" +
-                "('Yamaha Exciter 155', 'Yamaha', 51000000, 'ic_bike_placeholder', 1)");
+                "('Yamaha Exciter 155', 'Yamaha', 51654000, 'yamaha_exciter_155', 1)");
         db.execSQL("INSERT INTO motorbikes(name, brand, price, image, featured) VALUES" +
-                "('Honda Vision', 'Honda', 36000000, 'ic_bike_placeholder', 1)");
+                "('Honda Vision', 'Honda', 35999999, 'honda_vision', 1)");
         db.execSQL("INSERT INTO motorbikes(name, brand, price, image, featured) VALUES" +
-                "('Air Blade 160', 'Honda', 56000000, 'ic_bike_placeholder', 1)");
+                "('Air Blade 160', 'Honda', 55999999, 'air_blade_160', 1)");
         db.execSQL("INSERT INTO motorbikes(name, brand, price, image, featured) VALUES" +
-                "('Yamaha Grande', 'Yamaha', 47000000, 'ic_bike_placeholder', 1)");
+                "('Yamaha Grande', 'Yamaha', 47888888, 'yamaha_grande', 1)");
     }
-
 
     private void seedUsers(SQLiteDatabase db) {
         db.execSQL("INSERT INTO users(username, password, fullname, role) VALUES" +
@@ -88,6 +104,7 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOTORBIKES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
         onCreate(db);
     }
 }

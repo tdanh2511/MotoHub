@@ -50,6 +50,11 @@ public class LoginActivity extends AppCompatActivity {
             finish();
         });
 
+        findViewById(R.id.tvGoRegister).setOnClickListener(v -> {
+            startActivity(new Intent(this, RegisterActivity.class));
+            finish();
+        });
+
         userRepository = new UserRepository(this);
 
         btnLogin.setOnClickListener(v -> handleLogin());

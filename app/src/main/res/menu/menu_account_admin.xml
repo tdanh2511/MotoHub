@@ -1,12 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <item
         android:id="@+id/menuProfile"
-        android:title="Tài khoản" />
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:orderInCategory="1"
+        android:title="Thông tin tài khoản"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/menuAdmin"
-        android:title="Trang quản trị" />
+        android:icon="@android:drawable/ic_menu_manage"
+        android:orderInCategory="2"
+        android:title="Trang quản trị"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/menuLogout"
-        android:title="Đăng xuất" />
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:orderInCategory="99"
+        android:title="Đăng xuất"
+        app:showAsAction="never" />
+
 </menu>

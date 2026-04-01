@@ -15,6 +15,7 @@
         <activity android:name=".activities.auth.LoginActivity" />
         <activity android:name=".activities.admin.AdminHomeActivity" />
         <activity android:name=".activities.user.HomeActivity" />
+        <activity android:name=".activities.user.ProfileActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -40,4 +40,29 @@ public class UserRepository {
 
         return user;
     }
+
+    public User getUserById(int userId) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql = "SELECT * FROM " + MotoHubDbHelper.TABLE_USERS +
+                " WHERE " + MotoHubDbHelper.COL_USER_ID + "=?";
+
+        Cursor cursor = db.rawQuery(sql, new String[]{String.valueOf(userId)});
+
+        User user = null;
+
+        if (cursor.moveToFirst()) {
+            user = new User();
+            user.setId(cursor.getInt(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_USER_ID)));
+            user.setUsername(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_USERNAME)));
+            user.setPassword(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_PASSWORD)));
+            user.setFullname(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_FULLNAME)));
+            user.setRole(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_ROLE)));
+        }
+
+        cursor.close();
+        db.close();
+
+        return user;
+    }
 }

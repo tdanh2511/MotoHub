@@ -64,26 +64,6 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:text="Họ và tên"
-                android:textStyle="bold"
-                android:textColor="#1F1F1F" />
-
-            <EditText
-                android:id="@+id/edtFullname"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginTop="8dp"
-                android:background="#FFFFFF"
-                android:hint="Nhập họ và tên"
-                android:paddingStart="14dp"
-                android:paddingEnd="14dp"
-                android:textColor="#1F1F1F"
-                android:textColorHint="#999999" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Tên đăng nhập"
                 android:textStyle="bold"
@@ -94,7 +74,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
-                android:background="#FFFFFF"
+                android:background="#FFF0F0"
                 android:hint="Nhập tên đăng nhập"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
@@ -114,8 +94,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:layout_marginTop="8dp"
-                android:background="#FFFFFF"
+                android:background="#FFF0F0"
                 android:hint="Nhập mật khẩu"
+                android:paddingStart="14dp"
+                android:paddingEnd="14dp"
+                android:textColor="#1F1F1F"
+                android:textColorHint="#999999"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Xác nhận mật khẩu"
+                android:textStyle="bold"
+                android:textColor="#1F1F1F" />
+
+            <EditText
+                android:id="@+id/edtConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_marginTop="8dp"
+                android:background="#FFF0F0"
+                android:hint="Nhập lại mật khẩu"
                 android:paddingStart="14dp"
                 android:paddingEnd="14dp"
                 android:textColor="#1F1F1F"
