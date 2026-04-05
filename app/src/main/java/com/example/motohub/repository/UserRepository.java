@@ -1,5 +1,6 @@
 package com.example.motohub.repository;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -33,6 +34,9 @@ public class UserRepository {
             user.setPassword(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_PASSWORD)));
             user.setFullname(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_FULLNAME)));
             user.setRole(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_ROLE)));
+            user.setPhone(cursor.getString(cursor.getColumnIndexOrThrow("phone")));
+            user.setEmail(cursor.getString(cursor.getColumnIndexOrThrow("email")));
+            user.setAddress(cursor.getString(cursor.getColumnIndexOrThrow("address")));
         }
 
         cursor.close();
@@ -58,11 +62,39 @@ public class UserRepository {
             user.setPassword(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_PASSWORD)));
             user.setFullname(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_FULLNAME)));
             user.setRole(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_ROLE)));
+            user.setPhone(cursor.getString(cursor.getColumnIndexOrThrow("phone")));
+            user.setEmail(cursor.getString(cursor.getColumnIndexOrThrow("email")));
+            user.setAddress(cursor.getString(cursor.getColumnIndexOrThrow("address")));
         }
 
         cursor.close();
         db.close();
 
         return user;
+    }
+
+    public void updateUserInfo(int userId, String fullname, String phone, String email, String address) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        String sql = "UPDATE " + MotoHubDbHelper.TABLE_USERS + " SET "
+                + MotoHubDbHelper.COL_FULLNAME + "=?, "
+                + MotoHubDbHelper.COL_PHONE + "=?, "
+                + MotoHubDbHelper.COL_EMAIL + "=?, "
+                + MotoHubDbHelper.COL_ADDRESS + "=? "
+                + "WHERE " + MotoHubDbHelper.COL_USER_ID + "=?";
+
+        db.execSQL(sql, new Object[]{fullname, phone, email, address, userId});
+        db.close();
+    }
+
+    public boolean updatePassword(int userId, String newPassword) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put("password", newPassword);
+
+        int result = db.update("users", values, "id=?", new String[]{String.valueOf(userId)});
+
+        return result > 0;
     }
 }

@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MotoHubDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "motohub.db";
-    public static final int DB_VERSION = 4;
+    public static final int DB_VERSION = 5;
 
     // Bang motorbikes
     public static final String TABLE_MOTORBIKES = "motorbikes";
@@ -27,6 +27,9 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
     public static final String COL_PASSWORD = "password";
     public static final String COL_FULLNAME = "fullname";
     public static final String COL_ROLE = "role";
+    public static final String COL_PHONE = "phone";
+    public static final String COL_EMAIL = "email";
+    public static final String COL_ADDRESS = "address";
 
     // Bang favorites
     public static final String TABLE_FAVORITES = "favorites";
@@ -59,6 +62,9 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
                 + COL_USERNAME + " TEXT NOT NULL UNIQUE, "
                 + COL_PASSWORD + " TEXT NOT NULL, "
                 + COL_FULLNAME + " TEXT, "
+                + COL_PHONE + " TEXT, "
+                + COL_EMAIL + " TEXT, "
+                + COL_ADDRESS + " TEXT, "
                 + COL_ROLE + " TEXT NOT NULL"
                 + ");";
 

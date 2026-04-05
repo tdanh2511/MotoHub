@@ -16,6 +16,10 @@
         <activity android:name=".activities.admin.AdminHomeActivity" />
         <activity android:name=".activities.user.HomeActivity" />
         <activity android:name=".activities.user.ProfileActivity" />
+        <activity android:name=".activities.user.PersonalInfoActivity" />
+        <activity android:name=".activities.user.ChangePasswordActivity"/>
+        <activity android:name=".activities.user.PrivacyPolicyActivity" />
+        <activity android:name=".activities.user.WarrantyPolicyActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
