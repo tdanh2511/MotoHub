@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MotoHubDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "motohub.db";
-    public static final int DB_VERSION = 5;
+    public static final int DB_VERSION = 6;
 
     // Bang motorbikes
     public static final String TABLE_MOTORBIKES = "motorbikes";
@@ -36,6 +36,19 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
     public static final String COL_FAVORITE_ID = "id";
     public static final String COL_FAVORITE_USER_ID = "user_id";
     public static final String COL_FAVORITE_MOTORBIKE_ID = "motorbike_id";
+
+    // Bang orders
+    public static final String TABLE_ORDERS = "orders";
+    public static final String COL_ORDER_ID = "id";
+    public static final String COL_ORDER_USER_ID = "user_id";
+    public static final String COL_ORDER_MOTORBIKE_ID = "motorbike_id";
+    public static final String COL_ORDER_CUSTOMER_NAME = "customer_name";
+    public static final String COL_ORDER_MOTORBIKE_NAME = "motorbike_name";
+    public static final String COL_ORDER_PRICE = "price";
+    public static final String COL_ORDER_DATE = "order_date";
+    public static final String COL_ORDER_STATUS = "status";
+    public static final String COL_ORDER_PHONE = "phone";
+    public static final String COL_ORDER_ADDRESS = "address";
 
     public MotoHubDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -80,9 +93,26 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
 
         db.execSQL(createFavoritesTable);
 
+        // Orders table
+        String createOrdersTable = "CREATE TABLE " + TABLE_ORDERS + " ("
+                + COL_ORDER_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_ORDER_USER_ID + " INTEGER NOT NULL, "
+                + COL_ORDER_MOTORBIKE_ID + " INTEGER NOT NULL, "
+                + COL_ORDER_CUSTOMER_NAME + " TEXT NOT NULL, "
+                + COL_ORDER_MOTORBIKE_NAME + " TEXT NOT NULL, "
+                + COL_ORDER_PRICE + " REAL NOT NULL, "
+                + COL_ORDER_DATE + " TEXT NOT NULL, "
+                + COL_ORDER_STATUS + " TEXT NOT NULL, "
+                + COL_ORDER_PHONE + " TEXT, "
+                + COL_ORDER_ADDRESS + " TEXT"
+                + ");";
+
+        db.execSQL(createOrdersTable);
+
         // Seed data
         seedMotorbikes(db);
         seedUsers(db);
+        seedOrders(db);
     }
 
     private void seedMotorbikes(SQLiteDatabase db) {
@@ -106,11 +136,23 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
                 "('user1', '123456', 'Người dùng 1', 'user')");
     }
 
+    private void seedOrders(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO orders(user_id, motorbike_id, customer_name, motorbike_name, price, order_date, status, phone, address) VALUES" +
+                "(2, 1, 'Nguyễn Văn A', 'Honda SH 160i', 92756400, '2024-01-15', 'completed', '0901234567', 'Hà Nội')");
+        
+        db.execSQL("INSERT INTO orders(user_id, motorbike_id, customer_name, motorbike_name, price, order_date, status, phone, address) VALUES" +
+                "(2, 2, 'Trần Thị B', 'Yamaha Exciter 155', 51654000, '2024-01-20', 'processing', '0912345678', 'Hồ Chí Minh')");
+        
+        db.execSQL("INSERT INTO orders(user_id, motorbike_id, customer_name, motorbike_name, price, order_date, status, phone, address) VALUES" +
+                "(2, 3, 'Lê Văn C', 'Honda Vision', 35999999, '2024-01-25', 'pending', '0923456789', 'Đà Nẵng')");
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOTORBIKES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDERS);
         onCreate(db);
     }
 }

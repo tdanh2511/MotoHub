@@ -14,6 +14,9 @@
         <activity android:name=".activities.auth.RegisterActivity" />
         <activity android:name=".activities.auth.LoginActivity" />
         <activity android:name=".activities.admin.AdminHomeActivity" />
+        <activity android:name=".activities.admin.ManageBikesActivity" />
+        <activity android:name=".activities.admin.ManageUsersActivity" />
+        <activity android:name=".activities.admin.ManageRevenueActivity" />
         <activity android:name=".activities.user.HomeActivity" />
         <activity android:name=".activities.user.ProfileActivity" />
         <activity android:name=".activities.user.PersonalInfoActivity" />
