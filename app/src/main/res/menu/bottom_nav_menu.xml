@@ -7,9 +7,9 @@
         android:icon="@drawable/ic_home" />
 
     <item
-        android:id="@+id/nav_shop"
-        android:title="Cửa hàng"
-        android:icon="@drawable/ic_shop" />
+        android:id="@+id/nav_cart"
+        android:title="Giỏ hàng"
+        android:icon="@drawable/ic_cart" />
 
     <item
         android:id="@+id/nav_favorite"

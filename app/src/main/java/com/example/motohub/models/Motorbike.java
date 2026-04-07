@@ -8,6 +8,7 @@ public class Motorbike {
     private String image;
     private boolean featured;
     private boolean favorite;
+    private int stock;
 
     public Motorbike() {
     }
@@ -19,6 +20,7 @@ public class Motorbike {
         this.price = price;
         this.image = image;
         this.featured = featured;
+        this.stock = 10;
     }
 
     public Motorbike(int id, String name, String brand, double price, String image, boolean featured, boolean favorite) {
@@ -29,6 +31,18 @@ public class Motorbike {
         this.image = image;
         this.featured = featured;
         this.favorite = favorite;
+        this.stock = 10;
+    }
+
+    public Motorbike(int id, String name, String brand, double price, String image, boolean featured, boolean favorite, int stock) {
+        this.id = id;
+        this.name = name;
+        this.brand = brand;
+        this.price = price;
+        this.image = image;
+        this.featured = featured;
+        this.favorite = favorite;
+        this.stock = stock;
     }
 
     public int getId() {
@@ -85,5 +99,13 @@ public class Motorbike {
 
     public void setFavorite(boolean favorite) {
         this.favorite = favorite;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
+        this.stock = stock;
     }
 }

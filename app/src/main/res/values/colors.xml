@@ -2,4 +2,31 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Primary brand colors - Red theme for MotoHub -->
+    <color name="primary">#D32F2F</color>
+    <color name="primary_dark">#B71C1C</color>
+    <color name="primary_light">#EF5350</color>
+
+    <!-- Accent colors -->
+    <color name="accent">#FFC107</color>
+    <color name="accent_dark">#FFA000</color>
+
+    <!-- Text colors -->
+    <color name="text_primary">#1F1F1F</color>
+    <color name="text_secondary">#777777</color>
+    <color name="text_hint">#999999</color>
+
+    <!-- Background colors -->
+    <color name="background">#FFFFFFFF</color>
+    <color name="background_light">#F5F5F5</color>
+    <color name="background_dark">#FF121212</color>
+
+    <!-- Other colors -->
+    <color name="red">#D32F2F</color>
+    <color name="divider">#EEEEEE</color>
+    <color name="shadow">#33000000</color>
+    <color name="success">#4CAF50</color>
+    <color name="warning">#FF9800</color>
+    <color name="error">#F44336</color>
 </resources>

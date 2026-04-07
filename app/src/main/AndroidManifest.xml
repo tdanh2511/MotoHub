@@ -23,6 +23,15 @@
         <activity android:name=".activities.user.ChangePasswordActivity"/>
         <activity android:name=".activities.user.PrivacyPolicyActivity" />
         <activity android:name=".activities.user.WarrantyPolicyActivity" />
+        <activity android:name=".activities.user.GuideActivity"/>
+        <activity android:name=".activities.user.SupportActivity" />
+        <activity android:name=".activities.user.SearchActivity" />
+        <activity android:name=".activities.user.MotorbikeDetailActivity" />
+        <activity android:name=".activities.user.CartActivity" />
+        <activity android:name=".activities.user.FavoritesActivity" />
+        <activity android:name=".activities.user.CheckoutActivity" />
+        <activity android:name=".activities.user.OrderHistoryActivity" />
+        <activity android:name=".activities.user.OrderDetailActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

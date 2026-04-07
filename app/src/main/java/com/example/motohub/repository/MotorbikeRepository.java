@@ -33,12 +33,43 @@ public class MotorbikeRepository {
             bike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
             bike.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
             bike.setFeatured(cursor.getInt(cursor.getColumnIndexOrThrow("featured")) == 1);
+            
+            int stockIndex = cursor.getColumnIndex("stock");
+            if (stockIndex != -1) {
+                bike.setStock(cursor.getInt(stockIndex));
+            }
+            
             list.add(bike);
         }
 
         cursor.close();
         db.close();
         return list;
+    }
+
+    public Motorbike getMotorbikeById(int id) {
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM motorbikes WHERE id = ?", new String[]{String.valueOf(id)});
+
+        Motorbike bike = null;
+        if (cursor.moveToFirst()) {
+            bike = new Motorbike();
+            bike.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+            bike.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            bike.setBrand(cursor.getString(cursor.getColumnIndexOrThrow("brand")));
+            bike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
+            bike.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
+            bike.setFeatured(cursor.getInt(cursor.getColumnIndexOrThrow("featured")) == 1);
+            
+            int stockIndex = cursor.getColumnIndex("stock");
+            if (stockIndex != -1) {
+                bike.setStock(cursor.getInt(stockIndex));
+            }
+        }
+
+        cursor.close();
+        db.close();
+        return bike;
     }
 
     public List<Motorbike> searchMotorbikes(String keyword) {
@@ -49,6 +80,57 @@ public class MotorbikeRepository {
         String searchValue = "%" + keyword + "%";
 
         Cursor cursor = db.rawQuery(sql, new String[]{searchValue, searchValue});
+
+        while (cursor.moveToNext()) {
+            Motorbike bike = new Motorbike();
+            bike.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+            bike.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            bike.setBrand(cursor.getString(cursor.getColumnIndexOrThrow("brand")));
+            bike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
+            bike.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
+            bike.setFeatured(cursor.getInt(cursor.getColumnIndexOrThrow("featured")) == 1);
+            list.add(bike);
+        }
+
+        cursor.close();
+        db.close();
+        return list;
+    }
+
+    // lọc theo hãng
+    public List<Motorbike> filterByBrand(String brand) {
+        List<Motorbike> list = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql = "SELECT * FROM motorbikes WHERE brand = ? ORDER BY id DESC";
+        Cursor cursor = db.rawQuery(sql, new String[]{brand});
+
+        while (cursor.moveToNext()) {
+            Motorbike bike = new Motorbike();
+            bike.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+            bike.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            bike.setBrand(cursor.getString(cursor.getColumnIndexOrThrow("brand")));
+            bike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
+            bike.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
+            bike.setFeatured(cursor.getInt(cursor.getColumnIndexOrThrow("featured")) == 1);
+            list.add(bike);
+        }
+
+        cursor.close();
+        db.close();
+        return list;
+    }
+
+    // lọc theo giá
+    public List<Motorbike> filterByPrice(double minPrice, double maxPrice) {
+        List<Motorbike> list = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql = "SELECT * FROM motorbikes WHERE price >= ? AND price <= ? ORDER BY id DESC";
+        Cursor cursor = db.rawQuery(sql, new String[]{
+                String.valueOf(minPrice),
+                String.valueOf(maxPrice)
+        });
 
         while (cursor.moveToNext()) {
             Motorbike bike = new Motorbike();
@@ -103,5 +185,43 @@ public class MotorbikeRepository {
                 new String[]{String.valueOf(motorbikeId)});
         db.close();
         return result;
+    }
+
+    public List<Motorbike> filterMotorbikes(String brand, double minPrice, double maxPrice) {
+        List<Motorbike> list = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getReadableDatabase();
+
+        String sql;
+        Cursor cursor;
+
+        if (brand == null || brand.isEmpty()) {
+            sql = "SELECT * FROM motorbikes WHERE price >= ? AND price <= ? ORDER BY id DESC";
+            cursor = db.rawQuery(sql, new String[]{
+                    String.valueOf(minPrice),
+                    String.valueOf(maxPrice)
+            });
+        } else {
+            sql = "SELECT * FROM motorbikes WHERE brand = ? AND price >= ? AND price <= ? ORDER BY id DESC";
+            cursor = db.rawQuery(sql, new String[]{
+                    brand,
+                    String.valueOf(minPrice),
+                    String.valueOf(maxPrice)
+            });
+        }
+
+        while (cursor.moveToNext()) {
+            Motorbike bike = new Motorbike();
+            bike.setId(cursor.getInt(cursor.getColumnIndexOrThrow("id")));
+            bike.setName(cursor.getString(cursor.getColumnIndexOrThrow("name")));
+            bike.setBrand(cursor.getString(cursor.getColumnIndexOrThrow("brand")));
+            bike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
+            bike.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
+            bike.setFeatured(cursor.getInt(cursor.getColumnIndexOrThrow("featured")) == 1);
+            list.add(bike);
+        }
+
+        cursor.close();
+        db.close();
+        return list;
     }
 }

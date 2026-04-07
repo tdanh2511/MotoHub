@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="20dp"
+    android:background="#FFFFFF">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bộ lọc nâng cao"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#D32F2F" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Hãng xe"
+        android:textStyle="bold"
+        android:textColor="#222222" />
+
+    <RadioGroup
+        android:id="@+id/radioBrand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <RadioButton
+            android:id="@+id/rbAllBrand"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tất cả" />
+
+        <RadioButton
+            android:id="@+id/rbHonda"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Honda" />
+
+        <RadioButton
+            android:id="@+id/rbYamaha"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yamaha" />
+
+        <RadioButton
+            android:id="@+id/rbSuzuki"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Suzuki" />
+
+        <RadioButton
+            android:id="@+id/rbSYM"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="SYM" />
+
+        <RadioButton
+            android:id="@+id/rbPiaggio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Piaggio" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Khoảng giá"
+        android:textStyle="bold"
+        android:textColor="#222222" />
+
+    <RadioGroup
+        android:id="@+id/radioPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp">
+
+        <RadioButton
+            android:id="@+id/rbPriceAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tất cả" />
+
+        <RadioButton
+            android:id="@+id/rbPriceLow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Dưới 50 triệu" />
+
+        <RadioButton
+            android:id="@+id/rbPriceHigh"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Từ 50 triệu trở lên" />
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btnClearFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Xóa lọc"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/btnApplyFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:backgroundTint="#D32F2F"
+            android:text="Áp dụng"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
+</LinearLayout>

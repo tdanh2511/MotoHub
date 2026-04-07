@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MotoHubDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "motohub.db";
-    public static final int DB_VERSION = 6;
+    public static final int DB_VERSION = 7;
 
     // Bang motorbikes
     public static final String TABLE_MOTORBIKES = "motorbikes";
@@ -18,6 +18,7 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
     public static final String COL_PRICE = "price";
     public static final String COL_IMAGE = "image";
     public static final String COL_FEATURED = "featured";
+    public static final String COL_STOCK = "stock";
 
     // Bang users
     public static final String TABLE_USERS = "users";
@@ -45,10 +46,18 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
     public static final String COL_ORDER_CUSTOMER_NAME = "customer_name";
     public static final String COL_ORDER_MOTORBIKE_NAME = "motorbike_name";
     public static final String COL_ORDER_PRICE = "price";
+    public static final String COL_ORDER_QUANTITY = "quantity";
     public static final String COL_ORDER_DATE = "order_date";
     public static final String COL_ORDER_STATUS = "status";
     public static final String COL_ORDER_PHONE = "phone";
     public static final String COL_ORDER_ADDRESS = "address";
+
+    // Bang cart
+    public static final String TABLE_CART = "cart";
+    public static final String COL_CART_ID = "id";
+    public static final String COL_CART_USER_ID = "user_id";
+    public static final String COL_CART_MOTORBIKE_ID = "motorbike_id";
+    public static final String COL_CART_QUANTITY = "quantity";
 
     public MotoHubDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -64,7 +73,8 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
                 + COL_BRAND + " TEXT NOT NULL, "
                 + COL_PRICE + " REAL NOT NULL, "
                 + COL_IMAGE + " TEXT, "
-                + COL_FEATURED + " INTEGER DEFAULT 0"
+                + COL_FEATURED + " INTEGER DEFAULT 0, "
+                + COL_STOCK + " INTEGER DEFAULT 10"
                 + ");";
 
         db.execSQL(createMotorbikeTable);
@@ -101,6 +111,7 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
                 + COL_ORDER_CUSTOMER_NAME + " TEXT NOT NULL, "
                 + COL_ORDER_MOTORBIKE_NAME + " TEXT NOT NULL, "
                 + COL_ORDER_PRICE + " REAL NOT NULL, "
+                + COL_ORDER_QUANTITY + " INTEGER DEFAULT 1, "
                 + COL_ORDER_DATE + " TEXT NOT NULL, "
                 + COL_ORDER_STATUS + " TEXT NOT NULL, "
                 + COL_ORDER_PHONE + " TEXT, "
@@ -108,6 +119,17 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
                 + ");";
 
         db.execSQL(createOrdersTable);
+
+        // Cart table
+        String createCartTable = "CREATE TABLE " + TABLE_CART + " ("
+                + COL_CART_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+                + COL_CART_USER_ID + " INTEGER NOT NULL, "
+                + COL_CART_MOTORBIKE_ID + " INTEGER NOT NULL, "
+                + COL_CART_QUANTITY + " INTEGER DEFAULT 1, "
+                + "UNIQUE(" + COL_CART_USER_ID + ", " + COL_CART_MOTORBIKE_ID + ")"
+                + ");";
+
+        db.execSQL(createCartTable);
 
         // Seed data
         seedMotorbikes(db);
@@ -153,6 +175,7 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CART);
         onCreate(db);
     }
 }

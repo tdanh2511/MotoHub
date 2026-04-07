@@ -27,23 +27,38 @@ public class MotorbikeAdapter extends RecyclerView.Adapter<MotorbikeAdapter.Moto
         void onMotorbikeClick(Motorbike motorbike);
     }
 
+    public interface OnFavoriteChangeListener {
+        void onFavoriteChanged();
+    }
+
     private final Context context;
     private final List<Motorbike> motorbikeList;
     private final OnMotorbikeClickListener listener;
 
     private final int userId;
     private final FavoriteRepository favoriteRepository;
+    private final OnFavoriteChangeListener favoriteChangeListener;
 
     public MotorbikeAdapter(Context context,
                             List<Motorbike> motorbikeList,
                             OnMotorbikeClickListener listener,
                             int userId,
                             FavoriteRepository favoriteRepository) {
+        this(context, motorbikeList, listener, userId, favoriteRepository, null);
+    }
+
+    public MotorbikeAdapter(Context context,
+                            List<Motorbike> motorbikeList,
+                            OnMotorbikeClickListener listener,
+                            int userId,
+                            FavoriteRepository favoriteRepository,
+                            OnFavoriteChangeListener favoriteChangeListener) {
         this.context = context;
         this.motorbikeList = motorbikeList;
         this.listener = listener;
         this.userId = userId;
         this.favoriteRepository = favoriteRepository;
+        this.favoriteChangeListener = favoriteChangeListener;
     }
 
     @NonNull
@@ -88,12 +103,21 @@ public class MotorbikeAdapter extends RecyclerView.Adapter<MotorbikeAdapter.Moto
                 return;
             }
 
-            favoriteRepository.toggleFavorite(userId, motorbike.getId());
-
+            boolean wasAdded = favoriteRepository.toggleFavorite(userId, motorbike.getId());
             boolean newState = favoriteRepository.isFavorite(userId, motorbike.getId());
+            
             holder.imgFavorite.setImageResource(
                     newState ? R.drawable.ic_favorite_filled : R.drawable.ic_favorite_border
             );
+            
+            // Show toast notification
+            String message = newState ? "Đã thêm vào yêu thích" : "Đã xóa khỏi yêu thích";
+            Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
+
+            // Notify the parent activity if callback is set
+            if (favoriteChangeListener != null) {
+                favoriteChangeListener.onFavoriteChanged();
+            }
         });
     }
 

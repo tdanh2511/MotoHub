@@ -57,8 +57,16 @@ public class ProfileActivity extends AppCompatActivity {
             startActivity(new Intent(ProfileActivity.this, PersonalInfoActivity.class));
         });
 
+        findViewById(R.id.itemFavorites).setOnClickListener(v -> {
+            startActivity(new Intent(ProfileActivity.this, FavoritesActivity.class));
+        });
+
         findViewById(R.id.itemChangePassword).setOnClickListener(v -> {
             startActivity(new Intent(this, ChangePasswordActivity.class));
+        });
+
+        findViewById(R.id.itemOrderHistory).setOnClickListener(v -> {
+            startActivity(new Intent(this, OrderHistoryActivity.class));
         });
 
         findViewById(R.id.itemWarranty).setOnClickListener(v -> {
@@ -67,6 +75,14 @@ public class ProfileActivity extends AppCompatActivity {
 
         findViewById(R.id.itemPrivacyPolicy).setOnClickListener(v -> {
             startActivity(new Intent(ProfileActivity.this, PrivacyPolicyActivity.class));
+        });
+
+        findViewById(R.id.itemGuide).setOnClickListener(v -> {
+            startActivity(new Intent(this, GuideActivity.class));
+        });
+
+        findViewById(R.id.itemSupport).setOnClickListener(v -> {
+            startActivity(new Intent(ProfileActivity.this, SupportActivity.class));
         });
 
         btnBack = findViewById(R.id.btnBack);

@@ -7,6 +7,7 @@ public class Order {
     private String customerName;
     private String motorbikeName;
     private double price;
+    private int quantity;
     private String orderDate;
     private String status;
     private String phone;
@@ -16,13 +17,14 @@ public class Order {
     }
 
     public Order(int id, int userId, int motorbikeId, String customerName, String motorbikeName,
-                 double price, String orderDate, String status, String phone, String address) {
+                 double price, int quantity, String orderDate, String status, String phone, String address) {
         this.id = id;
         this.userId = userId;
         this.motorbikeId = motorbikeId;
         this.customerName = customerName;
         this.motorbikeName = motorbikeName;
         this.price = price;
+        this.quantity = quantity;
         this.orderDate = orderDate;
         this.status = status;
         this.phone = phone;
@@ -75,6 +77,14 @@ public class Order {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     public String getOrderDate() {
