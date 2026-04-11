@@ -41,7 +41,6 @@ public class ChangePasswordActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("motohub_session", MODE_PRIVATE);
         userId = prefs.getInt("user_id", -1);
 
-
         btnChange.setOnClickListener(v -> changePassword());
     }
 
