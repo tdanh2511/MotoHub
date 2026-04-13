@@ -3,30 +3,45 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="6dp">
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="6dp"
+    app:cardCornerRadius="14dp"
+    app:cardElevation="3dp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#FFFFFF">
+        android:orientation="vertical">
 
-        <!-- Header with gradient -->
+        <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:background="@drawable/gradient_card_orange"
-            android:padding="16dp">
+            android:gravity="center_vertical"
+            android:background="#F57C00"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="14dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="👤"
-                android:textSize="36sp"
-                android:layout_marginEnd="12dp" />
+            <LinearLayout
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:gravity="center"
+                android:background="#33FFFFFF"
+                android:layout_marginEnd="12dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="👤"
+                    android:textSize="22sp" />
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -39,99 +54,85 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Họ và tên"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
-                    android:textColor="#FFFFFF" />
+                    android:textColor="#FFFFFF"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
 
                 <TextView
                     android:id="@+id/tvUserUsername"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
+                    android:layout_marginTop="3dp"
                     android:text="Username: user123"
-                    android:textSize="14sp"
-                    android:textColor="#FFFFFF"
-                    android:alpha="0.9" />
+                    android:textSize="13sp"
+                    android:textColor="#FFF3E0"
+                    android:maxLines="1"
+                    android:ellipsize="end" />
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Info and Actions -->
+        <!-- Nội dung -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingEnd="16dp"
+            android:paddingBottom="16dp">
 
+            <TextView
+                android:id="@+id/tvUserRole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vai trò: Người dùng"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:textColor="#444444" />
+
+            <TextView
+                android:id="@+id/tvUserPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="SĐT: 0123456789"
+                android:textSize="14sp"
+                android:textColor="#666666" />
+
+            <!-- Action buttons -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🏷️ "
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvUserRole"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Vai trò: Người dùng"
-                    android:textSize="15sp"
-                    android:textColor="#666666" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="📱 "
-                    android:textSize="16sp" />
-
-                <TextView
-                    android:id="@+id/tvUserPhone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="SĐT: 0123456789"
-                    android:textSize="15sp"
-                    android:textColor="#666666" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="14dp"
                 android:orientation="horizontal">
 
                 <Button
                     android:id="@+id/btnEdit"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="44dp"
                     android:layout_weight="1"
-                    android:layout_marginEnd="8dp"
-                    android:text="✏️ Sửa"
+                    android:layout_marginEnd="6dp"
+                    android:text="Sửa"
                     android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:backgroundTint="#2196F3"
-                    app:cornerRadius="8dp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#2196F3" />
 
                 <Button
                     android:id="@+id/btnDelete"
                     android:layout_width="0dp"
-                    android:layout_height="48dp"
+                    android:layout_height="44dp"
                     android:layout_weight="1"
-                    android:layout_marginStart="8dp"
-                    android:text="🗑️ Xóa"
+                    android:layout_marginStart="6dp"
+                    android:text="Xóa"
                     android:textAllCaps="false"
-                    android:textSize="16sp"
-                    android:backgroundTint="#F44336"
-                    app:cornerRadius="8dp" />
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:textColor="#FFFFFF"
+                    android:backgroundTint="#E53935" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

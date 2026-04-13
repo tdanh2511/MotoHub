@@ -76,17 +76,7 @@ public class MotorbikeAdapter extends RecyclerView.Adapter<MotorbikeAdapter.Moto
         holder.tvBrand.setText(motorbike.getBrand());
         holder.tvPrice.setText(formatPrice(motorbike.getPrice()));
 
-        int imageResId = context.getResources().getIdentifier(
-                motorbike.getImage(),
-                "drawable",
-                context.getPackageName()
-        );
-
-        if (imageResId != 0) {
-            holder.imgMotorbike.setImageResource(imageResId);
-        } else {
-            holder.imgMotorbike.setImageResource(R.drawable.ic_bike_placeholder);
-        }
+        loadImage(holder.imgMotorbike, motorbike.getImage());
 
         holder.itemView.setOnClickListener(v -> {
             if (listener != null) listener.onMotorbikeClick(motorbike);
@@ -143,5 +133,34 @@ public class MotorbikeAdapter extends RecyclerView.Adapter<MotorbikeAdapter.Moto
     private String formatPrice(double price) {
         NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
         return format.format(price) + " đ";
+    }
+
+    private void loadImage(ImageView img, String imageValue) {
+        if (imageValue == null || imageValue.isEmpty()) {
+            img.setImageResource(R.drawable.ic_bike_placeholder);
+            return;
+        }
+
+        try {
+            if (imageValue.startsWith("content://") || imageValue.startsWith("file://")) {
+                img.setImageURI(android.net.Uri.parse(imageValue));
+                return;
+            }
+
+            int resId = context.getResources().getIdentifier(
+                    imageValue,
+                    "drawable",
+                    context.getPackageName()
+            );
+
+            if (resId != 0) {
+                img.setImageResource(resId);
+            } else {
+                img.setImageResource(R.drawable.ic_bike_placeholder);
+            }
+
+        } catch (Exception e) {
+            img.setImageResource(R.drawable.ic_bike_placeholder);
+        }
     }
 }

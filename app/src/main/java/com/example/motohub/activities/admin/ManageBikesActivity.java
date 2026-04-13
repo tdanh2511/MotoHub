@@ -1,9 +1,9 @@
 package com.example.motohub.activities.admin;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -15,6 +15,7 @@ import com.example.motohub.R;
 import com.example.motohub.adapters.AdminMotorbikeAdapter;
 import com.example.motohub.models.Motorbike;
 import com.example.motohub.repository.MotorbikeRepository;
+import com.google.android.material.button.MaterialButton;
 
 import java.util.List;
 
@@ -59,15 +60,38 @@ public class ManageBikesActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
+    // ================= ADD =================
     private void showAddBikeDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Thêm xe mới");
 
         android.view.View view = getLayoutInflater().inflate(R.layout.dialog_bike_form, null);
+
         EditText etName = view.findViewById(R.id.etBikeName);
         EditText etBrand = view.findViewById(R.id.etBikeBrand);
         EditText etPrice = view.findViewById(R.id.etBikePrice);
         EditText etImage = view.findViewById(R.id.etBikeImage);
+        ImageView imgPreview = view.findViewById(R.id.imgBikePreview);
+        MaterialButton btnPreview = view.findViewById(R.id.btnPreviewImage);
+
+        // preview ảnh từ drawable
+        btnPreview.setOnClickListener(v -> {
+            String imageName = etImage.getText().toString().trim();
+
+            if (imageName.isEmpty()) {
+                etImage.setError("Nhập tên ảnh");
+                return;
+            }
+
+            int resId = getResources().getIdentifier(imageName, "drawable", getPackageName());
+
+            if (resId != 0) {
+                imgPreview.setImageResource(resId);
+            } else {
+                etImage.setError("Không tìm thấy ảnh");
+                imgPreview.setImageResource(android.R.drawable.ic_menu_gallery);
+            }
+        });
 
         builder.setView(view);
         builder.setPositiveButton("Thêm", (dialog, which) -> {
@@ -76,40 +100,69 @@ public class ManageBikesActivity extends AppCompatActivity {
             String priceStr = etPrice.getText().toString().trim();
             String image = etImage.getText().toString().trim();
 
-            if (name.isEmpty() || brand.isEmpty() || priceStr.isEmpty()) {
+            if (name.isEmpty() || brand.isEmpty() || priceStr.isEmpty() || image.isEmpty()) {
                 Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            double price = Double.parseDouble(priceStr);
-            Motorbike bike = new Motorbike(0, name, brand, price, image, false);
-            long result = motorbikeRepository.addMotorbike(bike);
+            int resId = getResources().getIdentifier(image, "drawable", getPackageName());
+            if (resId == 0) {
+                Toast.makeText(this, "Tên ảnh không tồn tại", Toast.LENGTH_SHORT).show();
+                return;
+            }
 
-            if (result > 0) {
-                Toast.makeText(this, "Thêm xe thành công", Toast.LENGTH_SHORT).show();
-                loadBikes();
-            } else {
-                Toast.makeText(this, "Thêm xe thất bại", Toast.LENGTH_SHORT).show();
+            try {
+                double price = Double.parseDouble(priceStr);
+                Motorbike bike = new Motorbike(0, name, brand, price, image, false);
+
+                long result = motorbikeRepository.addMotorbike(bike);
+
+                if (result > 0) {
+                    Toast.makeText(this, "Thêm xe thành công", Toast.LENGTH_SHORT).show();
+                    loadBikes();
+                } else {
+                    Toast.makeText(this, "Thêm xe thất bại", Toast.LENGTH_SHORT).show();
+                }
+            } catch (NumberFormatException e) {
+                Toast.makeText(this, "Giá xe không hợp lệ", Toast.LENGTH_SHORT).show();
             }
         });
+
         builder.setNegativeButton("Hủy", null);
         builder.show();
     }
 
+    // ================= EDIT =================
     private void showEditBikeDialog(Motorbike bike) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Sửa thông tin xe");
 
         android.view.View view = getLayoutInflater().inflate(R.layout.dialog_bike_form, null);
+
         EditText etName = view.findViewById(R.id.etBikeName);
         EditText etBrand = view.findViewById(R.id.etBikeBrand);
         EditText etPrice = view.findViewById(R.id.etBikePrice);
         EditText etImage = view.findViewById(R.id.etBikeImage);
+        ImageView imgPreview = view.findViewById(R.id.imgBikePreview);
+        MaterialButton btnPreview = view.findViewById(R.id.btnPreviewImage);
 
         etName.setText(bike.getName());
         etBrand.setText(bike.getBrand());
         etPrice.setText(String.valueOf(bike.getPrice()));
         etImage.setText(bike.getImage());
+
+        loadPreviewImage(imgPreview, bike.getImage());
+
+        btnPreview.setOnClickListener(v -> {
+            String imageName = etImage.getText().toString().trim();
+            int resId = getResources().getIdentifier(imageName, "drawable", getPackageName());
+
+            if (resId != 0) {
+                imgPreview.setImageResource(resId);
+            } else {
+                Toast.makeText(this, "Không tìm thấy ảnh", Toast.LENGTH_SHORT).show();
+            }
+        });
 
         builder.setView(view);
         builder.setPositiveButton("Lưu", (dialog, which) -> {
@@ -118,34 +171,53 @@ public class ManageBikesActivity extends AppCompatActivity {
             String priceStr = etPrice.getText().toString().trim();
             String image = etImage.getText().toString().trim();
 
-            if (name.isEmpty() || brand.isEmpty() || priceStr.isEmpty()) {
-                Toast.makeText(this, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            if (name.isEmpty() || brand.isEmpty() || priceStr.isEmpty() || image.isEmpty()) {
+                Toast.makeText(this, "Vui lòng nhập đầy đủ", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            bike.setName(name);
-            bike.setBrand(brand);
-            bike.setPrice(Double.parseDouble(priceStr));
-            bike.setImage(image);
+            try {
+                bike.setName(name);
+                bike.setBrand(brand);
+                bike.setPrice(Double.parseDouble(priceStr));
+                bike.setImage(image);
 
-            int result = motorbikeRepository.updateMotorbike(bike);
-            if (result > 0) {
-                Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
-                loadBikes();
-            } else {
-                Toast.makeText(this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                int result = motorbikeRepository.updateMotorbike(bike);
+
+                if (result > 0) {
+                    Toast.makeText(this, "Cập nhật thành công", Toast.LENGTH_SHORT).show();
+                    loadBikes();
+                } else {
+                    Toast.makeText(this, "Cập nhật thất bại", Toast.LENGTH_SHORT).show();
+                }
+            } catch (Exception e) {
+                Toast.makeText(this, "Lỗi dữ liệu", Toast.LENGTH_SHORT).show();
             }
         });
+
         builder.setNegativeButton("Hủy", null);
         builder.show();
     }
 
+    // ================= PREVIEW =================
+    private void loadPreviewImage(ImageView imageView, String imageValue) {
+        int resId = getResources().getIdentifier(imageValue, "drawable", getPackageName());
+
+        if (resId != 0) {
+            imageView.setImageResource(resId);
+        } else {
+            imageView.setImageResource(android.R.drawable.ic_menu_gallery);
+        }
+    }
+
+    // ================= DELETE =================
     private void showDeleteConfirmDialog(Motorbike bike) {
         new AlertDialog.Builder(this)
                 .setTitle("Xác nhận xóa")
                 .setMessage("Bạn có chắc muốn xóa xe " + bike.getName() + "?")
                 .setPositiveButton("Xóa", (dialog, which) -> {
                     int result = motorbikeRepository.deleteMotorbike(bike.getId());
+
                     if (result > 0) {
                         Toast.makeText(this, "Xóa xe thành công", Toast.LENGTH_SHORT).show();
                         loadBikes();

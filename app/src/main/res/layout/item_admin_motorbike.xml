@@ -13,20 +13,12 @@
         android:orientation="vertical"
         android:background="#FFFFFF">
 
-        <!-- Header with gradient -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:background="@drawable/gradient_card_red"
             android:padding="16dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🏍️"
-                android:textSize="36sp"
-                android:layout_marginEnd="12dp" />
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -55,7 +47,13 @@
             </LinearLayout>
         </LinearLayout>
 
-        <!-- Price and Actions -->
+        <ImageView
+            android:id="@+id/imgBike"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_gallery" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -83,7 +81,7 @@
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:layout_marginEnd="8dp"
-                    android:text="✏️ Sửa"
+                    android:text="Sửa"
                     android:textAllCaps="false"
                     android:textSize="16sp"
                     android:backgroundTint="#2196F3"
@@ -95,7 +93,7 @@
                     android:layout_height="48dp"
                     android:layout_weight="1"
                     android:layout_marginStart="8dp"
-                    android:text="🗑️ Xóa"
+                    android:text="Xóa"
                     android:textAllCaps="false"
                     android:textSize="16sp"
                     android:backgroundTint="#F44336"

@@ -4,80 +4,111 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:background="#FFF5F5">
 
-    <!-- Modern Header -->
-    <androidx.cardview.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardElevation="4dp"
-        app:cardCornerRadius="0dp">
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingStart="18dp"
+        android:paddingTop="28dp"
+        android:paddingEnd="18dp"
+        android:paddingBottom="16dp"
+        android:background="#D32F2F">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnBack"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="10dp"
+            android:contentDescription="Back"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:insetLeft="0dp"
+            android:insetRight="0dp"
+
+            app:icon="@drawable/ic_arrow_back"
+            app:iconTint="#FFFFFF"
+            app:iconSize="22dp"
+
+            app:backgroundTint="@android:color/transparent"
+            app:strokeWidth="0dp"
+            app:rippleColor="#33FFFFFF" />
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@drawable/gradient_card_red"
-            android:padding="16dp"
-            android:gravity="center_vertical">
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingStart="10dp"
+            android:paddingEnd="10dp">
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnBack"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:text="←"
-                android:textSize="28sp"
-                android:textColor="#FFFFFF"
-                android:textStyle="bold"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                app:backgroundTint="#4DFFFFFF"
-                app:cornerRadius="24dp"
-                app:strokeWidth="2dp"
-                app:strokeColor="#FFFFFF" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:orientation="vertical"
-                android:layout_marginStart="8dp">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🏍️ Quản lý xe"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Thêm, sửa, xóa xe máy"
-                    android:textSize="14sp"
-                    android:textColor="#FFFFFF"
-                    android:alpha="0.8" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnAddBike"
+            <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="48dp"
-                android:text="+ Thêm"
-                android:textAllCaps="false"
-                android:textSize="16sp"
-                android:backgroundTint="#FFFFFF"
-                android:textColor="#D32F2F"
-                app:cornerRadius="24dp" />
+                android:layout_height="wrap_content"
+                android:text="Quản lý xe"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#FFFFFF" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Thêm, sửa, xóa xe máy"
+                android:textSize="12sp"
+                android:textColor="#FFE0E0" />
         </LinearLayout>
-    </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btnAddBike"
+            android:layout_width="wrap_content"
+            android:layout_height="42dp"
+            android:layout_gravity="center_vertical"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:text="+ Thêm"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:backgroundTint="#FFFFFF"
+            android:textColor="#D32F2F" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="22dp"
+        android:layout_marginEnd="16dp"
+        android:text="Danh sách xe"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#B71C1C" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:text="Quản lý các mẫu xe hiện có trong hệ thống"
+        android:textSize="13sp"
+        android:textColor="#777777" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBikes"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="12dp"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:paddingBottom="12dp"
         android:clipToPadding="false" />
 
 </LinearLayout>

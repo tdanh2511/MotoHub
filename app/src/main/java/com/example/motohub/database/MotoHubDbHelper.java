@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MotoHubDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "motohub.db";
-    public static final int DB_VERSION = 7;
+    public static final int DB_VERSION = 9;
 
     // Bang motorbikes
     public static final String TABLE_MOTORBIKES = "motorbikes";
@@ -134,7 +134,6 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
         // Seed data
         seedMotorbikes(db);
         seedUsers(db);
-        seedOrders(db);
     }
 
     private void seedMotorbikes(SQLiteDatabase db) {
@@ -152,21 +151,10 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
 
     private void seedUsers(SQLiteDatabase db) {
         db.execSQL("INSERT INTO users(username, password, fullname, role) VALUES" +
-                "('admin', '123456', 'Quản trị viên', 'admin')");
+                "('admin', 'admin', 'Quản trị viên', 'admin')");
 
         db.execSQL("INSERT INTO users(username, password, fullname, role) VALUES" +
-                "('user1', '123456', 'Người dùng 1', 'user')");
-    }
-
-    private void seedOrders(SQLiteDatabase db) {
-        db.execSQL("INSERT INTO orders(user_id, motorbike_id, customer_name, motorbike_name, price, order_date, status, phone, address) VALUES" +
-                "(2, 1, 'Nguyễn Văn A', 'Honda SH 160i', 92756400, '2024-01-15', 'completed', '0901234567', 'Hà Nội')");
-        
-        db.execSQL("INSERT INTO orders(user_id, motorbike_id, customer_name, motorbike_name, price, order_date, status, phone, address) VALUES" +
-                "(2, 2, 'Trần Thị B', 'Yamaha Exciter 155', 51654000, '2024-01-20', 'processing', '0912345678', 'Hồ Chí Minh')");
-        
-        db.execSQL("INSERT INTO orders(user_id, motorbike_id, customer_name, motorbike_name, price, order_date, status, phone, address) VALUES" +
-                "(2, 3, 'Lê Văn C', 'Honda Vision', 35999999, '2024-01-25', 'pending', '0923456789', 'Đà Nẵng')");
+                "('user', '123456', 'Người dùng', 'user')");
     }
 
     @Override

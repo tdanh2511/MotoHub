@@ -1,10 +1,13 @@
 package com.example.motohub.adapters;
 
 import android.content.Context;
+import android.net.Uri;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,9 +22,9 @@ import java.util.Locale;
 
 public class AdminMotorbikeAdapter extends RecyclerView.Adapter<AdminMotorbikeAdapter.ViewHolder> {
 
-    private Context context;
-    private List<Motorbike> motorbikes;
-    private OnBikeActionListener listener;
+    private final Context context;
+    private final List<Motorbike> motorbikes;
+    private final OnBikeActionListener listener;
 
     public interface OnBikeActionListener {
         void onEdit(Motorbike bike);
@@ -44,15 +47,45 @@ public class AdminMotorbikeAdapter extends RecyclerView.Adapter<AdminMotorbikeAd
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Motorbike bike = motorbikes.get(position);
-        
+
         holder.tvName.setText(bike.getName());
         holder.tvBrand.setText("Hãng: " + bike.getBrand());
-        
+
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         holder.tvPrice.setText(formatter.format(bike.getPrice()));
 
+        loadBikeImage(holder.imgBike, bike.getImage());
+
         holder.btnEdit.setOnClickListener(v -> listener.onEdit(bike));
         holder.btnDelete.setOnClickListener(v -> listener.onDelete(bike));
+    }
+
+    private void loadBikeImage(ImageView imageView, String imageValue) {
+        if (TextUtils.isEmpty(imageValue)) {
+            imageView.setImageResource(android.R.drawable.ic_menu_gallery);
+            return;
+        }
+
+        try {
+            if (imageValue.startsWith("content://") || imageValue.startsWith("file://")) {
+                imageView.setImageURI(Uri.parse(imageValue));
+                return;
+            }
+
+            int resId = context.getResources().getIdentifier(
+                    imageValue,
+                    "drawable",
+                    context.getPackageName()
+            );
+
+            if (resId != 0) {
+                imageView.setImageResource(resId);
+            } else {
+                imageView.setImageResource(android.R.drawable.ic_menu_gallery);
+            }
+        } catch (Exception e) {
+            imageView.setImageResource(android.R.drawable.ic_menu_gallery);
+        }
     }
 
     @Override
@@ -61,11 +94,13 @@ public class AdminMotorbikeAdapter extends RecyclerView.Adapter<AdminMotorbikeAd
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView imgBike;
         TextView tvName, tvBrand, tvPrice;
         Button btnEdit, btnDelete;
 
         ViewHolder(View itemView) {
             super(itemView);
+            imgBike = itemView.findViewById(R.id.imgBike);
             tvName = itemView.findViewById(R.id.tvBikeName);
             tvBrand = itemView.findViewById(R.id.tvBikeBrand);
             tvPrice = itemView.findViewById(R.id.tvBikePrice);

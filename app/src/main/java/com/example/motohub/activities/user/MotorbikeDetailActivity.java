@@ -100,18 +100,7 @@ public class MotorbikeDetailActivity extends AppCompatActivity {
         tvBikePrice.setText(formatPrice(motorbike.getPrice()));
         tvStock.setText(String.valueOf(motorbike.getStock()));
 
-        int imageResId = getResources().getIdentifier(
-                motorbike.getImage(),
-                "drawable",
-                getPackageName()
-        );
-
-        if (imageResId != 0) {
-            imgMotorbike.setImageResource(imageResId);
-        } else {
-            imgMotorbike.setImageResource(R.drawable.ic_bike_placeholder);
-        }
-
+        loadImage(motorbike.getImage());
         updateFavoriteIcon();
     }
 
@@ -208,5 +197,34 @@ public class MotorbikeDetailActivity extends AppCompatActivity {
     private String formatPrice(double price) {
         NumberFormat format = NumberFormat.getInstance(new Locale("vi", "VN"));
         return format.format(price) + " đ";
+    }
+
+    private void loadImage(String imageValue) {
+        if (imageValue == null || imageValue.isEmpty()) {
+            imgMotorbike.setImageResource(R.drawable.ic_bike_placeholder);
+            return;
+        }
+
+        try {
+            if (imageValue.startsWith("content://") || imageValue.startsWith("file://")) {
+                imgMotorbike.setImageURI(android.net.Uri.parse(imageValue));
+                return;
+            }
+
+            int resId = getResources().getIdentifier(
+                    imageValue,
+                    "drawable",
+                    getPackageName()
+            );
+
+            if (resId != 0) {
+                imgMotorbike.setImageResource(resId);
+            } else {
+                imgMotorbike.setImageResource(R.drawable.ic_bike_placeholder);
+            }
+
+        } catch (Exception e) {
+            imgMotorbike.setImageResource(R.drawable.ic_bike_placeholder);
+        }
     }
 }

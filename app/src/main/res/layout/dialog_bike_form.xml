@@ -14,7 +14,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🏍️ Thông tin xe"
+            android:text="Thông tin xe"
             android:textSize="20sp"
             android:textStyle="bold"
             android:textColor="#D32F2F"
@@ -69,9 +69,19 @@
                 android:inputType="numberDecimal" />
         </com.google.android.material.textfield.TextInputLayout>
 
+        <ImageView
+            android:id="@+id/imgBikePreview"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:layout_marginBottom="12dp"
+            android:background="#EEEEEE"
+            android:scaleType="fitCenter"
+            android:src="@android:drawable/ic_menu_gallery" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="12dp"
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="#D32F2F"
             app:hintTextColor="#D32F2F">
@@ -80,15 +90,27 @@
                 android:id="@+id/etBikeImage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Tên ảnh (không có đuôi)"
-                android:inputType="text" />
+                android:hint="Tên ảnh drawable, ví dụ: honda_sh_160i"
+                android:inputType="text"
+                android:focusable="true"
+                android:clickable="true" />
         </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnPreviewImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Xem ảnh"
+            android:textAllCaps="false"
+            android:layout_marginBottom="12dp"
+            android:backgroundTint="#D32F2F"
+            android:textColor="#FFFFFF" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="* Bắt buộc nhập"
+            android:text="* Nhập đúng tên file ảnh trong drawable, không cần .png/.jpg"
             android:textSize="12sp"
             android:textColor="#666666"
             android:textStyle="italic" />

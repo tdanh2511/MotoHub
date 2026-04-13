@@ -71,8 +71,8 @@
                 android:text="Tất cả"
                 android:textAllCaps="false"
                 android:textSize="14sp"
-                android:backgroundTint="#D32F2F"
-                android:textColor="#FFFFFF"
+                android:backgroundTint="#EEEEEE"
+                android:textColor="#000000"
                 app:cornerRadius="20dp"
                 style="?android:attr/borderlessButtonStyle" />
 
@@ -85,7 +85,7 @@
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:backgroundTint="#EEEEEE"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 app:cornerRadius="20dp"
                 style="?android:attr/borderlessButtonStyle" />
 
@@ -98,7 +98,7 @@
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:backgroundTint="#EEEEEE"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 app:cornerRadius="20dp"
                 style="?android:attr/borderlessButtonStyle" />
 
@@ -111,7 +111,7 @@
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:backgroundTint="#EEEEEE"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 app:cornerRadius="20dp"
                 style="?android:attr/borderlessButtonStyle" />
 
@@ -123,7 +123,7 @@
                 android:textAllCaps="false"
                 android:textSize="14sp"
                 android:backgroundTint="#EEEEEE"
-                android:textColor="#666666"
+                android:textColor="#000000"
                 app:cornerRadius="20dp"
                 style="?android:attr/borderlessButtonStyle" />
         </LinearLayout>

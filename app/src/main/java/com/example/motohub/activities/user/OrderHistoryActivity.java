@@ -121,7 +121,7 @@ public class OrderHistoryActivity extends AppCompatActivity implements UserOrder
 
         if (selectedButton != null) {
             selectedButton.setBackgroundTintList(getColorStateList(R.color.red));
-            selectedButton.setTextColor(getColor(android.R.color.white));
+            selectedButton.setTextColor(getColor(android.R.color.holo_red_dark));
         }
     }
 
