@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MotoHubDbHelper extends SQLiteOpenHelper {
 
     public static final String DB_NAME = "motohub.db";
-    public static final int DB_VERSION = 9;
+    public static final int DB_VERSION = 10;
 
     // Bang motorbikes
     public static final String TABLE_MOTORBIKES = "motorbikes";
@@ -58,6 +58,11 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
     public static final String COL_CART_USER_ID = "user_id";
     public static final String COL_CART_MOTORBIKE_ID = "motorbike_id";
     public static final String COL_CART_QUANTITY = "quantity";
+
+    // Bang brand
+    public static final String TABLE_BRANDS = "brands";
+    public static final String COL_BRAND_ID = "id";
+    public static final String COL_BRAND_NAME = "name";
 
     public MotoHubDbHelper(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -131,9 +136,17 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
 
         db.execSQL(createCartTable);
 
+        String createBrandTable = "CREATE TABLE " + TABLE_BRANDS + " (" +
+                COL_BRAND_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                COL_BRAND_NAME + " TEXT NOT NULL UNIQUE" +
+                ");";
+
+        db.execSQL(createBrandTable);
+
         // Seed data
         seedMotorbikes(db);
         seedUsers(db);
+        seedBrands(db);
     }
 
     private void seedMotorbikes(SQLiteDatabase db) {
@@ -157,6 +170,14 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
                 "('user', '123456', 'Người dùng', 'user')");
     }
 
+    private void seedBrands(SQLiteDatabase db) {
+        db.execSQL("INSERT INTO brands(name) VALUES ('Honda')");
+        db.execSQL("INSERT INTO brands(name) VALUES ('Yamaha')");
+        db.execSQL("INSERT INTO brands(name) VALUES ('Suzuki')");
+        db.execSQL("INSERT INTO brands(name) VALUES ('SYM')");
+        db.execSQL("INSERT INTO brands(name) VALUES ('Piaggio')");
+    }
+
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_MOTORBIKES);
@@ -164,6 +185,7 @@ public class MotoHubDbHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_FAVORITES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_ORDERS);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_CART);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_BRANDS);
         onCreate(db);
     }
 }

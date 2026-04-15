@@ -36,21 +36,20 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
-            app:boxBackgroundMode="outline"
-            app:boxStrokeColor="#D32F2F"
-            app:hintTextColor="#D32F2F">
+            android:text="Hãng xe *"
+            android:textStyle="bold"
+            android:textColor="#D32F2F"
+            android:layout_marginBottom="6dp" />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etBikeBrand"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Hãng xe *"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+        <Spinner
+            android:id="@+id/spinnerBrand"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="12dp"
+            android:background="@android:drawable/editbox_background" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"

@@ -18,7 +18,7 @@ import com.example.motohub.repository.UserRepository;
 public class AdminHomeActivity extends AppCompatActivity {
 
     private TextView tvAdminName, tvTotalBikes, tvTotalUsers, tvTotalOrders;
-    private CardView btnManageBikes, btnManageUsers, btnManageRevenue;
+    private CardView btnManageBikes, btnManageBrands, btnManageUsers, btnManageRevenue;
     private Button btnLogout;
     private MotorbikeRepository motorbikeRepository;
     private UserRepository userRepository;
@@ -47,6 +47,7 @@ public class AdminHomeActivity extends AppCompatActivity {
         tvTotalUsers = findViewById(R.id.tvTotalUsers);
         tvTotalOrders = findViewById(R.id.tvTotalOrders);
         btnManageBikes = findViewById(R.id.btnManageBikes);
+        btnManageBrands = findViewById(R.id.btnManageBrands);
         btnManageUsers = findViewById(R.id.btnManageUsers);
         btnManageRevenue = findViewById(R.id.btnManageRevenue);
         btnLogout = findViewById(R.id.btnLogout);
@@ -56,6 +57,11 @@ public class AdminHomeActivity extends AppCompatActivity {
 
         btnManageBikes.setOnClickListener(v -> {
             Intent intent = new Intent(this, ManageBikesActivity.class);
+            startActivity(intent);
+        });
+
+        btnManageBrands.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ManageBrandsActivity.class);
             startActivity(intent);
         });
 

@@ -148,45 +148,6 @@ public class MotorbikeRepository {
         return list;
     }
 
-    public long addMotorbike(Motorbike bike) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(MotoHubDbHelper.COL_NAME, bike.getName());
-        values.put(MotoHubDbHelper.COL_BRAND, bike.getBrand());
-        values.put(MotoHubDbHelper.COL_PRICE, bike.getPrice());
-        values.put(MotoHubDbHelper.COL_IMAGE, bike.getImage());
-        values.put(MotoHubDbHelper.COL_FEATURED, bike.isFeatured() ? 1 : 0);
-        
-        long result = db.insert(MotoHubDbHelper.TABLE_MOTORBIKES, null, values);
-        db.close();
-        return result;
-    }
-
-    public int updateMotorbike(Motorbike bike) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(MotoHubDbHelper.COL_NAME, bike.getName());
-        values.put(MotoHubDbHelper.COL_BRAND, bike.getBrand());
-        values.put(MotoHubDbHelper.COL_PRICE, bike.getPrice());
-        values.put(MotoHubDbHelper.COL_IMAGE, bike.getImage());
-        values.put(MotoHubDbHelper.COL_FEATURED, bike.isFeatured() ? 1 : 0);
-        
-        int result = db.update(MotoHubDbHelper.TABLE_MOTORBIKES, values, 
-                MotoHubDbHelper.COL_ID + "=?", 
-                new String[]{String.valueOf(bike.getId())});
-        db.close();
-        return result;
-    }
-
-    public int deleteMotorbike(int motorbikeId) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int result = db.delete(MotoHubDbHelper.TABLE_MOTORBIKES, 
-                MotoHubDbHelper.COL_ID + "=?", 
-                new String[]{String.valueOf(motorbikeId)});
-        db.close();
-        return result;
-    }
-
     public List<Motorbike> filterMotorbikes(String brand, double minPrice, double maxPrice) {
         List<Motorbike> list = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -223,5 +184,44 @@ public class MotorbikeRepository {
         cursor.close();
         db.close();
         return list;
+    }
+
+    public long addMotorbike(Motorbike bike) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(MotoHubDbHelper.COL_NAME, bike.getName());
+        values.put(MotoHubDbHelper.COL_BRAND, bike.getBrand());
+        values.put(MotoHubDbHelper.COL_PRICE, bike.getPrice());
+        values.put(MotoHubDbHelper.COL_IMAGE, bike.getImage());
+        values.put(MotoHubDbHelper.COL_FEATURED, bike.isFeatured() ? 1 : 0);
+
+        long result = db.insert(MotoHubDbHelper.TABLE_MOTORBIKES, null, values);
+        db.close();
+        return result;
+    }
+
+    public int updateMotorbike(Motorbike bike) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(MotoHubDbHelper.COL_NAME, bike.getName());
+        values.put(MotoHubDbHelper.COL_BRAND, bike.getBrand());
+        values.put(MotoHubDbHelper.COL_PRICE, bike.getPrice());
+        values.put(MotoHubDbHelper.COL_IMAGE, bike.getImage());
+        values.put(MotoHubDbHelper.COL_FEATURED, bike.isFeatured() ? 1 : 0);
+
+        int result = db.update(MotoHubDbHelper.TABLE_MOTORBIKES, values,
+                MotoHubDbHelper.COL_ID + "=?",
+                new String[]{String.valueOf(bike.getId())});
+        db.close();
+        return result;
+    }
+
+    public int deleteMotorbike(int motorbikeId) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        int result = db.delete(MotoHubDbHelper.TABLE_MOTORBIKES,
+                MotoHubDbHelper.COL_ID + "=?",
+                new String[]{String.valueOf(motorbikeId)});
+        db.close();
+        return result;
     }
 }

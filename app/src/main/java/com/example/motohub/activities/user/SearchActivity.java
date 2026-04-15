@@ -17,6 +17,11 @@ import com.example.motohub.adapters.MotorbikeAdapter;
 import com.example.motohub.models.Motorbike;
 import com.example.motohub.repository.FavoriteRepository;
 import com.example.motohub.repository.MotorbikeRepository;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.example.motohub.models.Brand;
+import com.example.motohub.repository.BrandRepository;
 
 import java.util.List;
 
@@ -27,8 +32,7 @@ public class SearchActivity extends AppCompatActivity {
     private RecyclerView rcvResult;
     private TextView tvResultTitle;
 
-    private Button btnFilterAll, btnFilterHonda, btnFilterYamaha, btnPriceLow, btnPriceHigh, btnFilterSuzuki, btnFilterSYM, btnFilterPiaggio;
-
+    private Button btnFilterAll, btnPriceLow, btnPriceHigh;
     private MotorbikeRepository repository;
     private FavoriteRepository favoriteRepository;
     private MotorbikeAdapter adapter;
@@ -46,14 +50,9 @@ public class SearchActivity extends AppCompatActivity {
         tvResultTitle = findViewById(R.id.tvResultTitle);
 
         btnFilterAll = findViewById(R.id.btnFilterAll);
-        btnFilterHonda = findViewById(R.id.btnFilterHonda);
-        btnFilterYamaha = findViewById(R.id.btnFilterYamaha);
         btnPriceLow = findViewById(R.id.btnPriceLow);
         btnPriceHigh = findViewById(R.id.btnPriceHigh);
         btnOpenFilter = findViewById(R.id.btnOpenFilter);
-        btnFilterSuzuki = findViewById(R.id.btnFilterSuzuki);
-        btnFilterSYM = findViewById(R.id.btnFilterSYM);
-        btnFilterPiaggio = findViewById(R.id.btnFilterPiaggio);
 
         userId = getSharedPreferences("motohub_session", MODE_PRIVATE)
                 .getInt("user_id", -1);
@@ -81,31 +80,6 @@ public class SearchActivity extends AppCompatActivity {
         btnFilterAll.setOnClickListener(v -> {
             loadData(repository.getAllMotorbikes(), "Tất cả xe");
             setSelectedButton(btnFilterAll);
-        });
-
-        btnFilterHonda.setOnClickListener(v -> {
-            loadData(repository.filterByBrand("Honda"), "Xe hãng Honda");
-            setSelectedButton(btnFilterHonda);
-        });
-
-        btnFilterYamaha.setOnClickListener(v -> {
-            loadData(repository.filterByBrand("Yamaha"), "Xe hãng Yamaha");
-            setSelectedButton(btnFilterYamaha);
-        });
-
-        btnFilterSuzuki.setOnClickListener(v -> {
-            loadData(repository.filterByBrand("Suzuki"), "Xe hãng Suzuki");
-            setSelectedButton(btnFilterSuzuki);
-        });
-
-        btnFilterSYM.setOnClickListener(v -> {
-            loadData(repository.filterByBrand("SYM"), "Xe hãng SYM");
-            setSelectedButton(btnFilterSYM);
-        });
-
-        btnFilterPiaggio.setOnClickListener(v -> {
-            loadData(repository.filterByBrand("Piaggio"), "Xe hãng Piaggio");
-            setSelectedButton(btnFilterPiaggio);
         });
 
         btnPriceLow.setOnClickListener(v -> {
@@ -146,10 +120,29 @@ public class SearchActivity extends AppCompatActivity {
 
         android.app.AlertDialog dialog = builder.create();
 
-        android.widget.RadioGroup radioBrand = view.findViewById(R.id.radioBrand);
+        Spinner spinnerBrandFilter = view.findViewById(R.id.spinnerBrandFilter);
         android.widget.RadioGroup radioPrice = view.findViewById(R.id.radioPrice);
         android.widget.Button btnClearFilter = view.findViewById(R.id.btnClearFilter);
         android.widget.Button btnApplyFilter = view.findViewById(R.id.btnApplyFilter);
+
+        // Load hãng từ DB
+        BrandRepository brandRepository = new BrandRepository(this);
+        List<Brand> brandList = brandRepository.getAllBrands();
+
+        List<String> brandNames = new java.util.ArrayList<>();
+        brandNames.add("Tất cả");
+
+        for (Brand brand : brandList) {
+            brandNames.add(brand.getName());
+        }
+
+        ArrayAdapter<String> brandAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                brandNames
+        );
+        brandAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBrandFilter.setAdapter(brandAdapter);
 
         btnClearFilter.setOnClickListener(v -> {
             loadData(repository.getAllMotorbikes(), "Tất cả xe");
@@ -158,16 +151,13 @@ public class SearchActivity extends AppCompatActivity {
         });
 
         btnApplyFilter.setOnClickListener(v -> {
-            String brand = "";
+            String brand = spinnerBrandFilter.getSelectedItem().toString();
+            if ("Tất cả".equalsIgnoreCase(brand)) {
+                brand = "";
+            }
+
             double minPrice = 0;
             double maxPrice = Double.MAX_VALUE;
-
-            int brandId = radioBrand.getCheckedRadioButtonId();
-            if (brandId == R.id.rbHonda) brand = "Honda";
-            else if (brandId == R.id.rbYamaha) brand = "Yamaha";
-            else if (brandId == R.id.rbSuzuki) brand = "Suzuki";
-            else if (brandId == R.id.rbSYM) brand = "SYM";
-            else if (brandId == R.id.rbPiaggio) brand = "Piaggio";
 
             int priceId = radioPrice.getCheckedRadioButtonId();
             if (priceId == R.id.rbPriceLow) {
@@ -189,11 +179,6 @@ public class SearchActivity extends AppCompatActivity {
     private void resetFilterButtons() {
         Button[] buttons = {
                 btnFilterAll,
-                btnFilterHonda,
-                btnFilterYamaha,
-                btnFilterSuzuki,
-                btnFilterSYM,
-                btnFilterPiaggio,
                 btnPriceLow,
                 btnPriceHigh
         };

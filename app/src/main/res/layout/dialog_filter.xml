@@ -22,48 +22,20 @@
         android:textStyle="bold"
         android:textColor="#222222" />
 
-    <RadioGroup
-        android:id="@+id/radioBrand"
-        android:layout_width="match_parent"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp">
+        android:layout_marginTop="16dp"
+        android:text="Hãng xe"
+        android:textStyle="bold"
+        android:textColor="#222222" />
 
-        <RadioButton
-            android:id="@+id/rbAllBrand"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Tất cả" />
-
-        <RadioButton
-            android:id="@+id/rbHonda"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Honda" />
-
-        <RadioButton
-            android:id="@+id/rbYamaha"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Yamaha" />
-
-        <RadioButton
-            android:id="@+id/rbSuzuki"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Suzuki" />
-
-        <RadioButton
-            android:id="@+id/rbSYM"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="SYM" />
-
-        <RadioButton
-            android:id="@+id/rbPiaggio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Piaggio" />
-    </RadioGroup>
+    <Spinner
+        android:id="@+id/spinnerBrandFilter"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:drawable/editbox_background" />
 
     <TextView
         android:layout_width="wrap_content"

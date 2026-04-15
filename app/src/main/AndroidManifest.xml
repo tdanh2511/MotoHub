@@ -32,6 +32,7 @@
         <activity android:name=".activities.user.CheckoutActivity" />
         <activity android:name=".activities.user.OrderHistoryActivity" />
         <activity android:name=".activities.user.OrderDetailActivity" />
+        <activity android:name=".activities.admin.ManageBrandsActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true"

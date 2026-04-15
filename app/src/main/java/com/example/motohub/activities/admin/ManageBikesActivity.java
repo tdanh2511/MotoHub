@@ -16,6 +16,11 @@ import com.example.motohub.adapters.AdminMotorbikeAdapter;
 import com.example.motohub.models.Motorbike;
 import com.example.motohub.repository.MotorbikeRepository;
 import com.google.android.material.button.MaterialButton;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import com.example.motohub.models.Brand;
+import com.example.motohub.repository.BrandRepository;
 
 import java.util.List;
 
@@ -68,7 +73,24 @@ public class ManageBikesActivity extends AppCompatActivity {
         android.view.View view = getLayoutInflater().inflate(R.layout.dialog_bike_form, null);
 
         EditText etName = view.findViewById(R.id.etBikeName);
-        EditText etBrand = view.findViewById(R.id.etBikeBrand);
+        Spinner spinnerBrand = view.findViewById(R.id.spinnerBrand);
+
+        BrandRepository brandRepository = new BrandRepository(this);
+        List<Brand> brandList = brandRepository.getAllBrands();
+
+        List<String> brandNames = new java.util.ArrayList<>();
+        for (Brand brand : brandList) {
+            brandNames.add(brand.getName());
+        }
+
+        ArrayAdapter<String> brandAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                brandNames
+        );
+
+        brandAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBrand.setAdapter(brandAdapter);
         EditText etPrice = view.findViewById(R.id.etBikePrice);
         EditText etImage = view.findViewById(R.id.etBikeImage);
         ImageView imgPreview = view.findViewById(R.id.imgBikePreview);
@@ -96,7 +118,7 @@ public class ManageBikesActivity extends AppCompatActivity {
         builder.setView(view);
         builder.setPositiveButton("Thêm", (dialog, which) -> {
             String name = etName.getText().toString().trim();
-            String brand = etBrand.getText().toString().trim();
+            String brand = spinnerBrand.getSelectedItem().toString();
             String priceStr = etPrice.getText().toString().trim();
             String image = etImage.getText().toString().trim();
 
@@ -140,19 +162,47 @@ public class ManageBikesActivity extends AppCompatActivity {
         android.view.View view = getLayoutInflater().inflate(R.layout.dialog_bike_form, null);
 
         EditText etName = view.findViewById(R.id.etBikeName);
-        EditText etBrand = view.findViewById(R.id.etBikeBrand);
+        Spinner spinnerBrand = view.findViewById(R.id.spinnerBrand);
         EditText etPrice = view.findViewById(R.id.etBikePrice);
         EditText etImage = view.findViewById(R.id.etBikeImage);
         ImageView imgPreview = view.findViewById(R.id.imgBikePreview);
         MaterialButton btnPreview = view.findViewById(R.id.btnPreviewImage);
 
+        // ================= LOAD BRAND =================
+        BrandRepository brandRepository = new BrandRepository(this);
+        List<Brand> brandList = brandRepository.getAllBrands();
+
+        List<String> brandNames = new java.util.ArrayList<>();
+        for (Brand brand : brandList) {
+            brandNames.add(brand.getName());
+        }
+
+        ArrayAdapter<String> brandAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                brandNames
+        );
+        brandAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerBrand.setAdapter(brandAdapter);
+
+        // ================= SET DATA CŨ =================
         etName.setText(bike.getName());
-        etBrand.setText(bike.getBrand());
         etPrice.setText(String.valueOf(bike.getPrice()));
         etImage.setText(bike.getImage());
 
+        // set hãng đang chọn
+        int selectedPosition = 0;
+        for (int i = 0; i < brandNames.size(); i++) {
+            if (brandNames.get(i).equalsIgnoreCase(bike.getBrand())) {
+                selectedPosition = i;
+                break;
+            }
+        }
+        spinnerBrand.setSelection(selectedPosition);
+
         loadPreviewImage(imgPreview, bike.getImage());
 
+        // ================= PREVIEW IMAGE =================
         btnPreview.setOnClickListener(v -> {
             String imageName = etImage.getText().toString().trim();
             int resId = getResources().getIdentifier(imageName, "drawable", getPackageName());
@@ -164,10 +214,11 @@ public class ManageBikesActivity extends AppCompatActivity {
             }
         });
 
+        // ================= SAVE =================
         builder.setView(view);
         builder.setPositiveButton("Lưu", (dialog, which) -> {
             String name = etName.getText().toString().trim();
-            String brand = etBrand.getText().toString().trim();
+            String brand = spinnerBrand.getSelectedItem().toString();
             String priceStr = etPrice.getText().toString().trim();
             String image = etImage.getText().toString().trim();
 

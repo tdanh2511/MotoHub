@@ -67,7 +67,6 @@ public class HomeActivity extends AppCompatActivity {
         rcvMotorbikes.setLayoutManager(new GridLayoutManager(this, 2));
         rcvMotorbikes.setAdapter(adapter);
 
-        // click icon search trên header -> sang màn SearchActivity
         imgSearch.setOnClickListener(v -> {
             startActivity(new Intent(HomeActivity.this, SearchActivity.class));
         });
@@ -146,7 +145,6 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Reload adapter to update favorite status when returning from other screens
         if (adapter != null) {
             adapter.notifyDataSetChanged();
         }
