@@ -1,9 +1,7 @@
 package com.example.motohub.activities.auth;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -14,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.motohub.R;
 import com.example.motohub.activities.user.HomeActivity;
-import com.example.motohub.database.MotoHubDbHelper;
 import com.example.motohub.models.User;
 import com.example.motohub.repository.UserRepository;
 
@@ -79,11 +76,15 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setFullname("");
+        user.setPhone("");
+        user.setEmail("");
+        user.setAddress("");
         user.setRole("user");
 
-        boolean success = registerUser(user);
+        long result = userRepository.addUser(user);
 
-        if (success) {
+        if (result != -1) {
             User loggedInUser = userRepository.login(username, password);
 
             if (loggedInUser != null) {
@@ -111,28 +112,5 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString(KEY_FULLNAME, user.getFullname());
         editor.putString(KEY_ROLE, user.getRole());
         editor.apply();
-    }
-
-    private boolean registerUser(User user) {
-        try {
-            return userRepositoryInsert(user);
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private boolean userRepositoryInsert(User user) {
-        SQLiteDatabase db = new MotoHubDbHelper(this).getWritableDatabase();
-
-        ContentValues values = new ContentValues();
-        values.put("username", user.getUsername());
-        values.put("password", user.getPassword());
-        values.put("fullname", user.getFullname());
-        values.put("role", user.getRole());
-
-        long result = db.insert("users", null, values);
-        db.close();
-
-        return result != -1;
     }
 }
