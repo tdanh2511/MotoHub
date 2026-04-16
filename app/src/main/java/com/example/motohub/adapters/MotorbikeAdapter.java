@@ -30,11 +30,9 @@ public class MotorbikeAdapter extends RecyclerView.Adapter<MotorbikeAdapter.Moto
     public interface OnFavoriteChangeListener {
         void onFavoriteChanged();
     }
-
     private final Context context;
     private final List<Motorbike> motorbikeList;
     private final OnMotorbikeClickListener listener;
-
     private final int userId;
     private final FavoriteRepository favoriteRepository;
     private final OnFavoriteChangeListener favoriteChangeListener;

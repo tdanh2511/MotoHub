@@ -1,7 +1,9 @@
 package com.example.motohub.activities.auth;
 
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.motohub.R;
 import com.example.motohub.activities.user.HomeActivity;
+import com.example.motohub.database.MotoHubDbHelper;
 import com.example.motohub.models.User;
 import com.example.motohub.repository.UserRepository;
 
@@ -119,10 +122,9 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private boolean userRepositoryInsert(User user) {
-        android.database.sqlite.SQLiteDatabase db =
-                new com.example.motohub.database.MotoHubDbHelper(this).getWritableDatabase();
+        SQLiteDatabase db = new MotoHubDbHelper(this).getWritableDatabase();
 
-        android.content.ContentValues values = new android.content.ContentValues();
+        ContentValues values = new ContentValues();
         values.put("username", user.getUsername());
         values.put("password", user.getPassword());
         values.put("fullname", user.getFullname());
