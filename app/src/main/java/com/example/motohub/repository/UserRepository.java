@@ -123,6 +123,7 @@ public class UserRepository {
         ContentValues values = new ContentValues();
         values.put(MotoHubDbHelper.COL_PASSWORD, user.getPassword());
         values.put(MotoHubDbHelper.COL_FULLNAME, user.getFullname());
+        values.put(MotoHubDbHelper.COL_ROLE, user.getRole());
         values.put(MotoHubDbHelper.COL_PHONE, user.getPhone());
         values.put(MotoHubDbHelper.COL_EMAIL, user.getEmail());
         values.put(MotoHubDbHelper.COL_ADDRESS, user.getAddress());

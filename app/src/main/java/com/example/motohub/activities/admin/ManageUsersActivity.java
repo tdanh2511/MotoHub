@@ -1,8 +1,10 @@
 package com.example.motohub.activities.admin;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
@@ -23,6 +25,7 @@ public class ManageUsersActivity extends AppCompatActivity {
     private AdminUserAdapter adapter;
     private UserRepository userRepository;
     private Button btnAddUser, btnBack;
+    private static final String[] ROLE_DISPLAY_VALUES = {"Người dùng", "Quản trị viên"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +71,9 @@ public class ManageUsersActivity extends AppCompatActivity {
         EditText etFullname = view.findViewById(R.id.etFullname);
         EditText etPhone = view.findViewById(R.id.etPhone);
         EditText etEmail = view.findViewById(R.id.etEmail);
+        Spinner spinnerRole = view.findViewById(R.id.spinnerRole);
         EditText etAddress = view.findViewById(R.id.etAddress);
+        setupRoleSpinner(spinnerRole, "user");
 
         builder.setView(view);
         builder.setPositiveButton("Thêm", (dialog, which) -> {
@@ -77,6 +82,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             String fullname = etFullname.getText().toString().trim();
             String phone = etPhone.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
+            String role = getRoleValue(spinnerRole);
             String address = etAddress.getText().toString().trim();
 
             if (username.isEmpty() || password.isEmpty() || fullname.isEmpty()) {
@@ -84,7 +90,7 @@ public class ManageUsersActivity extends AppCompatActivity {
                 return;
             }
 
-            User user = new User(0, username, password, fullname, "user", phone, email, address);
+            User user = new User(0, username, password, fullname, role, phone, email, address);
             long result = userRepository.addUser(user);
 
             if (result > 0) {
@@ -108,7 +114,9 @@ public class ManageUsersActivity extends AppCompatActivity {
         EditText etFullname = view.findViewById(R.id.etFullname);
         EditText etPhone = view.findViewById(R.id.etPhone);
         EditText etEmail = view.findViewById(R.id.etEmail);
+        Spinner spinnerRole = view.findViewById(R.id.spinnerRole);
         EditText etAddress = view.findViewById(R.id.etAddress);
+        setupRoleSpinner(spinnerRole, user.getRole());
 
         etUsername.setText(user.getUsername());
         etUsername.setEnabled(false);
@@ -124,6 +132,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             String fullname = etFullname.getText().toString().trim();
             String phone = etPhone.getText().toString().trim();
             String email = etEmail.getText().toString().trim();
+            String role = getRoleValue(spinnerRole);
             String address = etAddress.getText().toString().trim();
 
             if (password.isEmpty() || fullname.isEmpty()) {
@@ -135,6 +144,7 @@ public class ManageUsersActivity extends AppCompatActivity {
             user.setFullname(fullname);
             user.setPhone(phone);
             user.setEmail(email);
+            user.setRole(role);
             user.setAddress(address);
 
             int result = userRepository.updateUser(user);
@@ -169,5 +179,20 @@ public class ManageUsersActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("Hủy", null)
                 .show();
+    }
+
+    private void setupRoleSpinner(Spinner spinnerRole, String selectedRole) {
+        ArrayAdapter<String> roleAdapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_spinner_item,
+                ROLE_DISPLAY_VALUES
+        );
+        roleAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinnerRole.setAdapter(roleAdapter);
+        spinnerRole.setSelection("admin".equalsIgnoreCase(selectedRole) ? 1 : 0);
+    }
+
+    private String getRoleValue(Spinner spinnerRole) {
+        return spinnerRole.getSelectedItemPosition() == 1 ? "admin" : "user";
     }
 }

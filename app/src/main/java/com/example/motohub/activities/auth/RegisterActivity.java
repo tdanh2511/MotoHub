@@ -76,11 +76,15 @@ public class RegisterActivity extends AppCompatActivity {
         User user = new User();
         user.setUsername(username);
         user.setPassword(password);
+        user.setFullname("");
+        user.setPhone("");
+        user.setEmail("");
+        user.setAddress("");
         user.setRole("user");
 
-        boolean success = registerUser(user);
+        long result = userRepository.addUser(user);
 
-        if (success) {
+        if (result != -1) {
             User loggedInUser = userRepository.login(username, password);
 
             if (loggedInUser != null) {
@@ -108,29 +112,5 @@ public class RegisterActivity extends AppCompatActivity {
         editor.putString(KEY_FULLNAME, user.getFullname());
         editor.putString(KEY_ROLE, user.getRole());
         editor.apply();
-    }
-
-    private boolean registerUser(User user) {
-        try {
-            return userRepositoryInsert(user);
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private boolean userRepositoryInsert(User user) {
-        android.database.sqlite.SQLiteDatabase db =
-                new com.example.motohub.database.MotoHubDbHelper(this).getWritableDatabase();
-
-        android.content.ContentValues values = new android.content.ContentValues();
-        values.put("username", user.getUsername());
-        values.put("password", user.getPassword());
-        values.put("fullname", user.getFullname());
-        values.put("role", user.getRole());
-
-        long result = db.insert("users", null, values);
-        db.close();
-
-        return result != -1;
     }
 }
