@@ -10,14 +10,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="#FFFFFF">
+        android:background="#FFFFFF"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:background="@drawable/gradient_card_red"
+            android:orientation="horizontal"
             android:padding="16dp">
 
             <LinearLayout
@@ -31,19 +31,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Tên xe"
+                    android:textColor="#FFFFFF"
                     android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvBikeBrand"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
+                    android:alpha="0.9"
                     android:text="Hãng: Honda"
-                    android:textSize="14sp"
                     android:textColor="#FFFFFF"
-                    android:alpha="0.9" />
+                    android:textSize="14sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -65,9 +65,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="50,000,000đ"
+                android:textColor="#D32F2F"
                 android:textSize="22sp"
-                android:textStyle="bold"
-                android:textColor="#D32F2F" />
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -79,24 +79,24 @@
                     android:id="@+id/btnEdit"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#2196F3"
                     android:text="Sửa"
                     android:textAllCaps="false"
                     android:textSize="16sp"
-                    android:backgroundTint="#2196F3"
                     app:cornerRadius="8dp" />
 
                 <Button
                     android:id="@+id/btnDelete"
                     android:layout_width="0dp"
                     android:layout_height="48dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#F44336"
                     android:text="Xóa"
                     android:textAllCaps="false"
                     android:textSize="16sp"
-                    android:backgroundTint="#F44336"
                     app:cornerRadius="8dp" />
             </LinearLayout>
         </LinearLayout>

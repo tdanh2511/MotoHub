@@ -33,12 +33,12 @@ public class MotorbikeRepository {
             bike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
             bike.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
             bike.setFeatured(cursor.getInt(cursor.getColumnIndexOrThrow("featured")) == 1);
-            
+
             int stockIndex = cursor.getColumnIndex("stock");
             if (stockIndex != -1) {
                 bike.setStock(cursor.getInt(stockIndex));
             }
-            
+
             list.add(bike);
         }
 
@@ -60,7 +60,7 @@ public class MotorbikeRepository {
             bike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow("price")));
             bike.setImage(cursor.getString(cursor.getColumnIndexOrThrow("image")));
             bike.setFeatured(cursor.getInt(cursor.getColumnIndexOrThrow("featured")) == 1);
-            
+
             int stockIndex = cursor.getColumnIndex("stock");
             if (stockIndex != -1) {
                 bike.setStock(cursor.getInt(stockIndex));

@@ -28,6 +28,7 @@ public class AdminMotorbikeAdapter extends RecyclerView.Adapter<AdminMotorbikeAd
 
     public interface OnBikeActionListener {
         void onEdit(Motorbike bike);
+
         void onDelete(Motorbike bike);
     }
 

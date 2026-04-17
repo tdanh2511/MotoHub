@@ -14,11 +14,11 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
             android:text="👤 Thông tin người dùng"
-            android:textSize="20sp"
-            android:textStyle="bold"
             android:textColor="#F57C00"
-            android:layout_marginBottom="16dp" />
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
@@ -42,8 +42,8 @@
             android:layout_marginBottom="12dp"
             app:boxBackgroundMode="outline"
             app:boxStrokeColor="#F57C00"
-            app:hintTextColor="#F57C00"
-            app:endIconMode="password_toggle">
+            app:endIconMode="password_toggle"
+            app:hintTextColor="#F57C00">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
@@ -104,10 +104,10 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="6dp"
             android:text="Vai trò *"
-            android:textStyle="bold"
             android:textColor="#F57C00"
-            android:layout_marginBottom="6dp" />
+            android:textStyle="bold" />
 
         <Spinner
             android:id="@+id/spinnerRole"
@@ -136,8 +136,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:text="* Bắt buộc nhập"
-            android:textSize="12sp"
             android:textColor="#666666"
+            android:textSize="12sp"
             android:textStyle="italic" />
 
     </LinearLayout>

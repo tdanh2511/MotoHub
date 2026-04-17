@@ -56,7 +56,7 @@ public class FavoritesActivity extends AppCompatActivity implements MotorbikeAda
 
     private void loadFavorites() {
         favoriteMotorbikes = favoriteRepository.getFavoriteMotorbikes(userId);
-        
+
         if (favoriteMotorbikes.isEmpty()) {
             showEmptyState();
         } else {

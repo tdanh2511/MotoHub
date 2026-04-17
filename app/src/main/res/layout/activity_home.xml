@@ -3,19 +3,19 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#FFF5F5">
+    android:background="#FFF5F5"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:background="#D32F2F"
         android:gravity="center_vertical"
+        android:orientation="horizontal"
         android:paddingStart="18dp"
         android:paddingTop="25dp"
         android:paddingEnd="18dp"
-        android:paddingBottom="14dp"
-        android:background="#D32F2F">
+        android:paddingBottom="14dp">
 
         <LinearLayout
             android:layout_width="0dp"
@@ -28,26 +28,26 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="MotoHub"
+                android:textColor="#FFFFFF"
                 android:textSize="24sp"
-                android:textStyle="bold"
-                android:textColor="#FFFFFF" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Khám phá xe máy phù hợp với bạn"
-                android:textSize="12sp"
-                android:textColor="#FFE0E0" />
+                android:textColor="#FFE0E0"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <ImageView
             android:id="@+id/imgSearch"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:padding="6dp"
-            android:src="@android:drawable/ic_menu_search"
             android:clickable="true"
             android:focusable="true"
+            android:padding="6dp"
+            android:src="@android:drawable/ic_menu_search"
             app:tint="#FFFFFF" />
     </LinearLayout>
 
@@ -58,9 +58,9 @@
         android:layout_marginTop="22dp"
         android:layout_marginEnd="16dp"
         android:text="Xe nổi bật"
+        android:textColor="#B71C1C"
         android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="#B71C1C" />
+        android:textStyle="bold" />
 
     <TextView
         android:layout_width="match_parent"
@@ -69,31 +69,31 @@
         android:layout_marginTop="4dp"
         android:layout_marginEnd="16dp"
         android:text="Một số mẫu xe đang được quan tâm"
-        android:textSize="13sp"
-        android:textColor="#777777" />
+        android:textColor="#777777"
+        android:textSize="13sp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcvMotorbikes"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginTop="12dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
         android:paddingStart="10dp"
         android:paddingEnd="10dp"
-        android:paddingBottom="12dp"
-        android:clipToPadding="false" />
+        android:paddingBottom="12dp" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:background="#FFFFFF"
-        app:itemIconTint="@color/nav_item_color"
-        app:itemTextColor="@color/nav_item_color"
-        app:itemIconSize="26dp"
         app:itemActiveIndicatorStyle="@null"
-        app:labelVisibilityMode="unlabeled"
+        app:itemIconSize="26dp"
+        app:itemIconTint="@color/nav_item_color"
         app:itemRippleColor="@android:color/transparent"
+        app:itemTextColor="@color/nav_item_color"
+        app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_nav_menu" />
 
 </LinearLayout>

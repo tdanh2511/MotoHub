@@ -47,9 +47,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1. Tìm kiếm xe"
-                android:textStyle="bold"
+                android:textColor="#D32F2F"
                 android:textSize="16sp"
-                android:textColor="#D32F2F" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -61,9 +61,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="2. Xem chi tiết"
-                android:textStyle="bold"
+                android:textColor="#D32F2F"
                 android:textSize="16sp"
-                android:textColor="#D32F2F" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -75,9 +75,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="3. Thêm vào yêu thích"
-                android:textStyle="bold"
+                android:textColor="#D32F2F"
                 android:textSize="16sp"
-                android:textColor="#D32F2F" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -89,9 +89,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="4. Liên hệ mua xe"
-                android:textStyle="bold"
+                android:textColor="#D32F2F"
                 android:textSize="16sp"
-                android:textColor="#D32F2F" />
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"

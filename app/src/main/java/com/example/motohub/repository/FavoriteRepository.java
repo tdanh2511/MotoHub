@@ -63,7 +63,7 @@ public class FavoriteRepository {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
         String query = "SELECT m.* FROM " + MotoHubDbHelper.TABLE_MOTORBIKES + " m " +
-                "INNER JOIN " + MotoHubDbHelper.TABLE_FAVORITES + " f ON m." + 
+                "INNER JOIN " + MotoHubDbHelper.TABLE_FAVORITES + " f ON m." +
                 MotoHubDbHelper.COL_ID + " = f." + MotoHubDbHelper.COL_FAVORITE_MOTORBIKE_ID +
                 " WHERE f." + MotoHubDbHelper.COL_FAVORITE_USER_ID + " = ?";
 
@@ -78,7 +78,7 @@ public class FavoriteRepository {
                 motorbike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_PRICE)));
                 motorbike.setImage(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_IMAGE)));
                 motorbike.setStock(cursor.getInt(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_STOCK)));
-                
+
                 favorites.add(motorbike);
             } while (cursor.moveToNext());
         }

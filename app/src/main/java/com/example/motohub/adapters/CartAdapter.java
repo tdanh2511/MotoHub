@@ -22,6 +22,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     public interface OnCartItemChangeListener {
         void onQuantityChanged(CartItem item, int newQuantity);
+
         void onItemDeleted(CartItem item);
     }
 
@@ -84,7 +85,7 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 CartItem currentItem = cartItems.get(currentPosition);
                 int currentQuantity = currentItem.getQuantity();
                 int maxStock = currentItem.getMotorbike().getStock();
-                
+
                 if (currentQuantity < maxStock) {
                     if (listener != null) {
                         listener.onQuantityChanged(currentItem, currentQuantity + 1);

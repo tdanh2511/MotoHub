@@ -23,6 +23,7 @@ public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserAdapter.View
 
     public interface OnUserActionListener {
         void onEdit(User user);
+
         void onDelete(User user);
     }
 
@@ -42,7 +43,7 @@ public class AdminUserAdapter extends RecyclerView.Adapter<AdminUserAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         User user = users.get(position);
-        
+
         holder.tvFullname.setText(user.getFullname());
         holder.tvUsername.setText("Username: " + user.getUsername());
         holder.tvRole.setText("Vai trò: " + (user.getRole().equals("admin") ? "Quản trị viên" : "Người dùng"));

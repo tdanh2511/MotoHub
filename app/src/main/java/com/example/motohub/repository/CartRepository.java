@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.motohub.database.MotoHubDbHelper;
 import com.example.motohub.models.CartItem;
@@ -21,7 +22,7 @@ public class CartRepository {
 
     public boolean addToCart(int userId, int motorbikeId, int quantity) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        
+
         // Check if item already exists in cart
         Cursor cursor = db.query(
                 MotoHubDbHelper.TABLE_CART,
@@ -36,7 +37,7 @@ public class CartRepository {
             int currentQuantity = cursor.getInt(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_CART_QUANTITY));
             ContentValues values = new ContentValues();
             values.put(MotoHubDbHelper.COL_CART_QUANTITY, currentQuantity + quantity);
-            
+
             int result = db.update(
                     MotoHubDbHelper.TABLE_CART,
                     values,
@@ -51,7 +52,7 @@ public class CartRepository {
             values.put(MotoHubDbHelper.COL_CART_USER_ID, userId);
             values.put(MotoHubDbHelper.COL_CART_MOTORBIKE_ID, motorbikeId);
             values.put(MotoHubDbHelper.COL_CART_QUANTITY, quantity);
-            
+
             long result = db.insert(MotoHubDbHelper.TABLE_CART, null, values);
             cursor.close();
             return result != -1;
@@ -62,9 +63,20 @@ public class CartRepository {
         List<CartItem> items = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String query = "SELECT c.*, m.* FROM " + MotoHubDbHelper.TABLE_CART + " c " +
-                "INNER JOIN " + MotoHubDbHelper.TABLE_MOTORBIKES + " m ON c." + 
-                MotoHubDbHelper.COL_CART_MOTORBIKE_ID + " = m." + MotoHubDbHelper.COL_ID +
+        String query = "SELECT " +
+                "c.id AS cart_id, " +
+                "c.user_id, " +
+                "c.motorbike_id, " +
+                "c.quantity, " +
+                "m.id AS bike_id, " +
+                "m.name, " +
+                "m.brand, " +
+                "m.price, " +
+                "m.image, " +
+                "m.stock " +
+                "FROM " + MotoHubDbHelper.TABLE_CART + " c " +
+                "INNER JOIN " + MotoHubDbHelper.TABLE_MOTORBIKES + " m " +
+                "ON c." + MotoHubDbHelper.COL_CART_MOTORBIKE_ID + " = m." + MotoHubDbHelper.COL_ID +
                 " WHERE c." + MotoHubDbHelper.COL_CART_USER_ID + " = ?";
 
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
@@ -72,13 +84,13 @@ public class CartRepository {
         if (cursor.moveToFirst()) {
             do {
                 CartItem item = new CartItem();
-                item.setId(cursor.getInt(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_CART_ID)));
+                item.setId(cursor.getInt(cursor.getColumnIndexOrThrow("cart_id")));
                 item.setUserId(cursor.getInt(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_CART_USER_ID)));
                 item.setMotorbikeId(cursor.getInt(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_CART_MOTORBIKE_ID)));
                 item.setQuantity(cursor.getInt(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_CART_QUANTITY)));
 
                 Motorbike motorbike = new Motorbike();
-                motorbike.setId(cursor.getInt(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_ID)));
+                motorbike.setId(cursor.getInt(cursor.getColumnIndexOrThrow("bike_id")));
                 motorbike.setName(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_NAME)));
                 motorbike.setBrand(cursor.getString(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_BRAND)));
                 motorbike.setPrice(cursor.getDouble(cursor.getColumnIndexOrThrow(MotoHubDbHelper.COL_PRICE)));
@@ -91,6 +103,7 @@ public class CartRepository {
         }
 
         cursor.close();
+        db.close();
         return items;
     }
 
@@ -111,11 +124,16 @@ public class CartRepository {
 
     public boolean removeFromCart(int cartItemId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        Log.d("CartRepo", "removeFromCart called with cartItemId = " + cartItemId);
+
         int result = db.delete(
                 MotoHubDbHelper.TABLE_CART,
                 MotoHubDbHelper.COL_CART_ID + " = ?",
                 new String[]{String.valueOf(cartItemId)}
         );
+
+        Log.d("CartRepo", "Rows deleted = " + result);
 
         return result > 0;
     }
@@ -132,8 +150,8 @@ public class CartRepository {
     public int getCartItemCount(int userId) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor cursor = db.rawQuery(
-                "SELECT SUM(" + MotoHubDbHelper.COL_CART_QUANTITY + ") FROM " + 
-                MotoHubDbHelper.TABLE_CART + " WHERE " + MotoHubDbHelper.COL_CART_USER_ID + " = ?",
+                "SELECT SUM(" + MotoHubDbHelper.COL_CART_QUANTITY + ") FROM " +
+                        MotoHubDbHelper.TABLE_CART + " WHERE " + MotoHubDbHelper.COL_CART_USER_ID + " = ?",
                 new String[]{String.valueOf(userId)}
         );
 

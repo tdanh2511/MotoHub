@@ -80,7 +80,7 @@ public class CheckoutActivity extends AppCompatActivity {
         fullName = prefs.getString("fullname", "");
 
         etFullName.setText(fullName);
-        
+
         // Load user info from database
         var user = userRepository.getUserById(userId);
         if (user != null) {
@@ -96,7 +96,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private void loadIntentData() {
         Intent intent = getIntent();
         fromCart = intent.getBooleanExtra("from_cart", false);
-        
+
         if (!fromCart) {
             motorbikeId = intent.getIntExtra("motorbike_id", -1);
             quantity = intent.getIntExtra("quantity", 1);
@@ -105,7 +105,7 @@ public class CheckoutActivity extends AppCompatActivity {
 
     private void loadOrderSummary() {
         double total;
-        
+
         if (fromCart) {
             total = cartRepository.getCartTotal(userId);
         } else {
@@ -151,7 +151,7 @@ public class CheckoutActivity extends AppCompatActivity {
         if (fromCart) {
             // Create orders from cart
             List<CartItem> cartItems = cartRepository.getCartItems(userId);
-            
+
             for (CartItem item : cartItems) {
                 long orderId = orderRepository.createOrder(
                         userId,
@@ -177,7 +177,7 @@ public class CheckoutActivity extends AppCompatActivity {
         } else {
             // Create single order
             Motorbike motorbike = motorbikeRepository.getMotorbikeById(motorbikeId);
-            
+
             long orderId = orderRepository.createOrder(
                     userId,
                     motorbikeId,
@@ -198,7 +198,7 @@ public class CheckoutActivity extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Đặt hàng thành công!", Toast.LENGTH_LONG).show();
-        
+
         // Go to home
         Intent intent = new Intent(this, HomeActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

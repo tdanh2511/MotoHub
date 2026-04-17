@@ -65,16 +65,16 @@ public class ManageRevenueActivity extends AppCompatActivity {
     private void loadStatistics() {
         List<Order> allOrders = orderRepository.getAllOrders();
         int totalOrders = allOrders.size();
-        
+
         long completedCount = allOrders.stream()
                 .filter(order -> "completed".equals(order.getStatus()))
                 .count();
-        
+
         double totalRevenue = orderRepository.getTotalRevenue();
 
         tvTotalOrders.setText(String.valueOf(totalOrders));
         tvCompletedOrders.setText(String.valueOf(completedCount));
-        
+
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         String formattedRevenue = formatter.format(totalRevenue).replace("₫", "đ");
         tvTotalRevenue.setText(formattedRevenue);
@@ -89,7 +89,7 @@ public class ManageRevenueActivity extends AppCompatActivity {
                 .setItems(statusLabels, (dialog, which) -> {
                     String newStatus = statuses[which];
                     int result = orderRepository.updateOrderStatus(order.getId(), newStatus);
-                    
+
                     if (result > 0) {
                         loadOrders();
                         loadStatistics();

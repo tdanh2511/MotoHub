@@ -79,9 +79,9 @@ public class UserRepository {
     public List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        
+
         Cursor cursor = db.rawQuery("SELECT * FROM " + MotoHubDbHelper.TABLE_USERS + " ORDER BY id DESC", null);
-        
+
         if (cursor.moveToFirst()) {
             do {
                 User user = new User();
@@ -96,7 +96,7 @@ public class UserRepository {
                 users.add(user);
             } while (cursor.moveToNext());
         }
-        
+
         cursor.close();
         db.close();
         return users;
@@ -112,7 +112,7 @@ public class UserRepository {
         values.put(MotoHubDbHelper.COL_PHONE, user.getPhone());
         values.put(MotoHubDbHelper.COL_EMAIL, user.getEmail());
         values.put(MotoHubDbHelper.COL_ADDRESS, user.getAddress());
-        
+
         long result = db.insert(MotoHubDbHelper.TABLE_USERS, null, values);
         db.close();
         return result;
@@ -127,9 +127,9 @@ public class UserRepository {
         values.put(MotoHubDbHelper.COL_PHONE, user.getPhone());
         values.put(MotoHubDbHelper.COL_EMAIL, user.getEmail());
         values.put(MotoHubDbHelper.COL_ADDRESS, user.getAddress());
-        
-        int result = db.update(MotoHubDbHelper.TABLE_USERS, values, 
-                MotoHubDbHelper.COL_USER_ID + "=?", 
+
+        int result = db.update(MotoHubDbHelper.TABLE_USERS, values,
+                MotoHubDbHelper.COL_USER_ID + "=?",
                 new String[]{String.valueOf(user.getId())});
         db.close();
         return result;
@@ -137,8 +137,8 @@ public class UserRepository {
 
     public int deleteUser(int userId) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        int result = db.delete(MotoHubDbHelper.TABLE_USERS, 
-                MotoHubDbHelper.COL_USER_ID + "=?", 
+        int result = db.delete(MotoHubDbHelper.TABLE_USERS,
+                MotoHubDbHelper.COL_USER_ID + "=?",
                 new String[]{String.valueOf(userId)});
         db.close();
         return result;

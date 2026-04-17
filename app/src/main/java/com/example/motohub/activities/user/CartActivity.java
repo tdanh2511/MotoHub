@@ -3,6 +3,7 @@ package com.example.motohub.activities.user;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -66,7 +67,7 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
 
     private void loadCartData() {
         cartItems = cartRepository.getCartItems(userId);
-        
+
         if (cartItems.isEmpty()) {
             showEmptyCart();
         } else {
@@ -124,13 +125,20 @@ public class CartActivity extends AppCompatActivity implements CartAdapter.OnCar
 
     @Override
     public void onItemDeleted(CartItem item) {
+        Log.d("Cart", "Before delete - cartItemId = " + item.getId()
+                + ", motorbikeId = " + item.getMotorbikeId());
+
         boolean success = cartRepository.removeFromCart(item.getId());
+
+        // Log.d("Cart", "Delete result = " + success);
+
         if (success) {
             Toast.makeText(this, "Đã xóa khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
-            // Reload cart data from database
             loadCartData();
         } else {
             Toast.makeText(this, "Có lỗi xảy ra", Toast.LENGTH_SHORT).show();
+        // Log.e("Cart", "Delete failed - cartItemId = " + item.getId()
+        //      + ", motorbikeId = " + item.getMotorbikeId());
         }
     }
 

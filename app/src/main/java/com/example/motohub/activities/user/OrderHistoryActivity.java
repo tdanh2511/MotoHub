@@ -112,11 +112,21 @@ public class OrderHistoryActivity extends AppCompatActivity implements UserOrder
 
         Button selectedButton = null;
         switch (currentFilter) {
-            case "all": selectedButton = btnFilterAll; break;
-            case "pending": selectedButton = btnFilterPending; break;
-            case "processing": selectedButton = btnFilterProcessing; break;
-            case "completed": selectedButton = btnFilterCompleted; break;
-            case "cancelled": selectedButton = btnFilterCancelled; break;
+            case "all":
+                selectedButton = btnFilterAll;
+                break;
+            case "pending":
+                selectedButton = btnFilterPending;
+                break;
+            case "processing":
+                selectedButton = btnFilterProcessing;
+                break;
+            case "completed":
+                selectedButton = btnFilterCompleted;
+                break;
+            case "cancelled":
+                selectedButton = btnFilterCancelled;
+                break;
         }
 
         if (selectedButton != null) {

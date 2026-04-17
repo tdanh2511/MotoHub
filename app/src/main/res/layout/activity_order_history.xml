@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:background="#F5F5F5"
+    android:orientation="vertical">
 
     <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="#D32F2F"
+        android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingTop="38dp"
         android:paddingEnd="16dp"
@@ -20,8 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/btnBack"
@@ -53,9 +53,9 @@
     <HorizontalScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none"
         android:background="#FFFFFF"
-        android:elevation="2dp">
+        android:elevation="2dp"
+        android:scrollbars="none">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -65,67 +65,67 @@
 
             <Button
                 android:id="@+id/btnFilterAll"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:layout_marginEnd="8dp"
+                android:backgroundTint="#EEEEEE"
                 android:text="Tất cả"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:backgroundTint="#EEEEEE"
                 android:textColor="#000000"
-                app:cornerRadius="20dp"
-                style="?android:attr/borderlessButtonStyle" />
+                android:textSize="14sp"
+                app:cornerRadius="20dp" />
 
             <Button
                 android:id="@+id/btnFilterPending"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:layout_marginEnd="8dp"
+                android:backgroundTint="#EEEEEE"
                 android:text="Chờ xử lý"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:backgroundTint="#EEEEEE"
                 android:textColor="#000000"
-                app:cornerRadius="20dp"
-                style="?android:attr/borderlessButtonStyle" />
+                android:textSize="14sp"
+                app:cornerRadius="20dp" />
 
             <Button
                 android:id="@+id/btnFilterProcessing"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:layout_marginEnd="8dp"
+                android:backgroundTint="#EEEEEE"
                 android:text="Đang xử lý"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:backgroundTint="#EEEEEE"
                 android:textColor="#000000"
-                app:cornerRadius="20dp"
-                style="?android:attr/borderlessButtonStyle" />
+                android:textSize="14sp"
+                app:cornerRadius="20dp" />
 
             <Button
                 android:id="@+id/btnFilterCompleted"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
                 android:layout_marginEnd="8dp"
+                android:backgroundTint="#EEEEEE"
                 android:text="Hoàn thành"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:backgroundTint="#EEEEEE"
                 android:textColor="#000000"
-                app:cornerRadius="20dp"
-                style="?android:attr/borderlessButtonStyle" />
+                android:textSize="14sp"
+                app:cornerRadius="20dp" />
 
             <Button
                 android:id="@+id/btnFilterCancelled"
+                style="?android:attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="38dp"
+                android:backgroundTint="#EEEEEE"
                 android:text="Đã hủy"
                 android:textAllCaps="false"
-                android:textSize="14sp"
-                android:backgroundTint="#EEEEEE"
                 android:textColor="#000000"
-                app:cornerRadius="20dp"
-                style="?android:attr/borderlessButtonStyle" />
+                android:textSize="14sp"
+                app:cornerRadius="20dp" />
         </LinearLayout>
     </HorizontalScrollView>
 
@@ -135,8 +135,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="8dp"
-        android:clipToPadding="false" />
+        android:clipToPadding="false"
+        android:padding="8dp" />
 
     <!-- Empty State -->
     <LinearLayout
@@ -144,8 +144,8 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:gravity="center"
+        android:orientation="vertical"
         android:padding="32dp"
         android:visibility="gone">
 
@@ -168,10 +168,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:gravity="center"
             android:text="Hãy bắt đầu mua sắm những chiếc xe mơ ước của bạn"
             android:textColor="#999999"
-            android:textSize="14sp"
-            android:gravity="center" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

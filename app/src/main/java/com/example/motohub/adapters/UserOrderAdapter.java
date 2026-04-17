@@ -66,38 +66,60 @@ public class UserOrderAdapter extends RecyclerView.Adapter<UserOrderAdapter.View
 
     private String getStatusText(String status) {
         switch (status) {
-            case "pending": return "Chờ xử lý";
-            case "processing": return "Đang xử lý";
-            case "completed": return "Hoàn thành";
-            case "cancelled": return "Đã hủy";
-            case "refund_requested": return "Đang xử lý hoàn trả";
-            case "refunded": return "Đã hoàn trả";
-            case "refund_rejected": return "Hoàn trả thất bại";
-            default: return status;
+            case "pending":
+                return "Chờ xử lý";
+            case "processing":
+                return "Đang xử lý";
+            case "completed":
+                return "Hoàn thành";
+            case "cancelled":
+                return "Đã hủy";
+            case "refund_requested":
+                return "Đang xử lý hoàn trả";
+            case "refunded":
+                return "Đã hoàn trả";
+            case "refund_rejected":
+                return "Hoàn trả thất bại";
+            default:
+                return status;
         }
     }
 
     private int getStatusColor(String status) {
         switch (status) {
-            case "pending": return Color.parseColor("#FF9800");
-            case "processing": return Color.parseColor("#2196F3");
-            case "completed": return Color.parseColor("#4CAF50");
-            case "cancelled": return Color.parseColor("#F44336");
-            case "refund_requested": return Color.parseColor("#9C27B0");
-            case "refunded": return Color.parseColor("#607D8B");
-            case "refund_rejected": return Color.parseColor("#E91E63");
-            default: return Color.parseColor("#999999");
+            case "pending":
+                return Color.parseColor("#FF9800");
+            case "processing":
+                return Color.parseColor("#2196F3");
+            case "completed":
+                return Color.parseColor("#4CAF50");
+            case "cancelled":
+                return Color.parseColor("#F44336");
+            case "refund_requested":
+                return Color.parseColor("#9C27B0");
+            case "refunded":
+                return Color.parseColor("#607D8B");
+            case "refund_rejected":
+                return Color.parseColor("#E91E63");
+            default:
+                return Color.parseColor("#999999");
         }
     }
 
     private int getMotorbikeImageResource(int motorbikeId) {
         switch (motorbikeId) {
-            case 1: return R.drawable.honda_sh_160i;
-            case 2: return R.drawable.yamaha_exciter_155;
-            case 3: return R.drawable.honda_vision;
-            case 4: return R.drawable.air_blade_160;
-            case 5: return R.drawable.yamaha_grande;
-            default: return R.drawable.ic_bike_placeholder;
+            case 1:
+                return R.drawable.honda_sh_160i;
+            case 2:
+                return R.drawable.yamaha_exciter_155;
+            case 3:
+                return R.drawable.honda_vision;
+            case 4:
+                return R.drawable.air_blade_160;
+            case 5:
+                return R.drawable.yamaha_grande;
+            default:
+                return R.drawable.ic_bike_placeholder;
         }
     }
 

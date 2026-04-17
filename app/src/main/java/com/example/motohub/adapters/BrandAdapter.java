@@ -19,6 +19,7 @@ public class BrandAdapter extends RecyclerView.Adapter<BrandAdapter.BrandViewHol
 
     public interface OnBrandActionListener {
         void onEdit(Brand brand);
+
         void onDelete(Brand brand);
     }
 

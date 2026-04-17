@@ -54,13 +54,13 @@ public class MotorbikeDetailActivity extends AppCompatActivity {
         btnCart = findViewById(R.id.btnCart);
         btnDecrease = findViewById(R.id.btnDecrease);
         btnIncrease = findViewById(R.id.btnIncrease);
-        
+
         tvBikeName = findViewById(R.id.tvBikeName);
         tvBikeBrand = findViewById(R.id.tvBikeBrand);
         tvBikePrice = findViewById(R.id.tvBikePrice);
         tvStock = findViewById(R.id.tvStock);
         tvQuantity = findViewById(R.id.tvQuantity);
-        
+
         btnAddToCart = findViewById(R.id.btnAddToCart);
         btnBuyNow = findViewById(R.id.btnBuyNow);
     }
@@ -129,7 +129,7 @@ public class MotorbikeDetailActivity extends AppCompatActivity {
 
             favoriteRepository.toggleFavorite(userId, motorbike.getId());
             updateFavoriteIcon();
-            
+
             // Show toast notification
             boolean isFavorite = favoriteRepository.isFavorite(userId, motorbike.getId());
             String message = isFavorite ? "Đã thêm vào yêu thích" : "Đã xóa khỏi yêu thích";

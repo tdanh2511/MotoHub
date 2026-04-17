@@ -7,10 +7,10 @@
     android:layout_marginTop="6dp"
     android:layout_marginEnd="8dp"
     android:layout_marginBottom="6dp"
+    app:cardBackgroundColor="#FFFFFF"
     app:cardCornerRadius="14dp"
     app:cardElevation="3dp"
-    app:cardUseCompatPadding="true"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardUseCompatPadding="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,9 +21,9 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
             android:background="#2E7D32"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="16dp"
             android:paddingTop="14dp"
             android:paddingEnd="16dp"
@@ -32,9 +32,9 @@
             <LinearLayout
                 android:layout_width="44dp"
                 android:layout_height="44dp"
-                android:gravity="center"
+                android:layout_marginEnd="12dp"
                 android:background="#33FFFFFF"
-                android:layout_marginEnd="12dp">
+                android:gravity="center">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -53,23 +53,23 @@
                     android:id="@+id/tvCustomerName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Nguyễn Văn A"
-                    android:textSize="17sp"
-                    android:textStyle="bold"
-                    android:textColor="#FFFFFF"
+                    android:ellipsize="end"
                     android:maxLines="1"
-                    android:ellipsize="end" />
+                    android:text="Nguyễn Văn A"
+                    android:textColor="#FFFFFF"
+                    android:textSize="17sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/tvMotorbikeName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="Honda SH 160i"
-                    android:textSize="13sp"
-                    android:textColor="#C8E6C9"
+                    android:ellipsize="end"
                     android:maxLines="1"
-                    android:ellipsize="end" />
+                    android:text="Honda SH 160i"
+                    android:textColor="#C8E6C9"
+                    android:textSize="13sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -89,9 +89,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="50,000,000đ"
+                android:textColor="#2E7D32"
                 android:textSize="20sp"
-                android:textStyle="bold"
-                android:textColor="#2E7D32" />
+                android:textStyle="bold" />
 
             <!-- DATE -->
             <TextView
@@ -100,8 +100,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="01/01/2024"
-                android:textSize="13sp"
-                android:textColor="#777777" />
+                android:textColor="#777777"
+                android:textSize="13sp" />
 
             <!-- STATUS -->
             <TextView
@@ -109,15 +109,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:background="#FF9800"
                 android:paddingStart="10dp"
-                android:paddingEnd="10dp"
                 android:paddingTop="4dp"
+                android:paddingEnd="10dp"
                 android:paddingBottom="4dp"
                 android:text="Chờ xử lý"
-                android:textSize="12sp"
-                android:textStyle="bold"
                 android:textColor="#FFFFFF"
-                android:background="#FF9800" />
+                android:textSize="12sp"
+                android:textStyle="bold" />
 
             <!-- ACTION -->
             <LinearLayout
@@ -130,27 +130,27 @@
                     android:id="@+id/btnUpdateStatus"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
-                    android:layout_weight="1"
                     android:layout_marginEnd="6dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#43A047"
                     android:text="Cập nhật"
                     android:textAllCaps="false"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#43A047" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
 
                 <Button
                     android:id="@+id/btnDelete"
                     android:layout_width="0dp"
                     android:layout_height="44dp"
-                    android:layout_weight="1"
                     android:layout_marginStart="6dp"
+                    android:layout_weight="1"
+                    android:backgroundTint="#E53935"
                     android:text="Xóa"
                     android:textAllCaps="false"
-                    android:textSize="14sp"
-                    android:textStyle="bold"
                     android:textColor="#FFFFFF"
-                    android:backgroundTint="#E53935" />
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

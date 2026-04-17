@@ -4,8 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
-    android:orientation="vertical"
     android:background="#FFFFFF"
+    android:orientation="vertical"
     android:padding="12dp">
 
     <FrameLayout

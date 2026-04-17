@@ -25,6 +25,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     public interface OnOrderActionListener {
         void onUpdateStatus(Order order);
+
         void onDelete(Order order);
     }
 
@@ -44,15 +45,15 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Order order = orders.get(position);
-        
+
         holder.tvCustomerName.setText("Khách hàng: " + order.getCustomerName());
         holder.tvMotorbikeName.setText("Xe: " + order.getMotorbikeName());
-        
+
         NumberFormat formatter = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
         holder.tvPrice.setText(formatter.format(order.getPrice()));
-        
+
         holder.tvDate.setText("Ngày: " + order.getOrderDate());
-        
+
         String statusText = getStatusText(order.getStatus());
         holder.tvStatus.setText("Trạng thái: " + statusText);
 
@@ -62,11 +63,16 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
 
     private String getStatusText(String status) {
         switch (status) {
-            case "pending": return "Chờ xử lý";
-            case "processing": return "Đang xử lý";
-            case "completed": return "Hoàn thành";
-            case "cancelled": return "Đã hủy";
-            default: return status;
+            case "pending":
+                return "Chờ xử lý";
+            case "processing":
+                return "Đang xử lý";
+            case "completed":
+                return "Hoàn thành";
+            case "cancelled":
+                return "Đã hủy";
+            default:
+                return status;
         }
     }
 

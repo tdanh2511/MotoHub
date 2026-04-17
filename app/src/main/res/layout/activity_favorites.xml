@@ -10,8 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:background="#D32F2F"
+        android:orientation="vertical"
         android:paddingStart="16dp"
         android:paddingTop="38dp"
         android:paddingEnd="16dp"
@@ -20,8 +20,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
             <ImageView
                 android:id="@+id/btnBack"
@@ -89,10 +89,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:gravity="center"
             android:text="Khám phá và lưu những chiếc xe yêu thích của bạn"
             android:textColor="#999999"
-            android:textSize="14sp"
-            android:gravity="center" />
+            android:textSize="14sp" />
     </LinearLayout>
 
 </LinearLayout>

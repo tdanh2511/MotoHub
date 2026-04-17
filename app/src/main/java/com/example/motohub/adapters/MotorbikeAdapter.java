@@ -30,11 +30,9 @@ public class MotorbikeAdapter extends RecyclerView.Adapter<MotorbikeAdapter.Moto
     public interface OnFavoriteChangeListener {
         void onFavoriteChanged();
     }
-
     private final Context context;
     private final List<Motorbike> motorbikeList;
     private final OnMotorbikeClickListener listener;
-
     private final int userId;
     private final FavoriteRepository favoriteRepository;
     private final OnFavoriteChangeListener favoriteChangeListener;
@@ -95,11 +93,11 @@ public class MotorbikeAdapter extends RecyclerView.Adapter<MotorbikeAdapter.Moto
 
             boolean wasAdded = favoriteRepository.toggleFavorite(userId, motorbike.getId());
             boolean newState = favoriteRepository.isFavorite(userId, motorbike.getId());
-            
+
             holder.imgFavorite.setImageResource(
                     newState ? R.drawable.ic_favorite_filled : R.drawable.ic_favorite_border
             );
-            
+
             // Show toast notification
             String message = newState ? "Đã thêm vào yêu thích" : "Đã xóa khỏi yêu thích";
             Toast.makeText(context, message, Toast.LENGTH_SHORT).show();

@@ -1,11 +1,15 @@
 package com.example.motohub.activities.admin;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +34,10 @@ public class ManageBikesActivity extends AppCompatActivity {
     private AdminMotorbikeAdapter adapter;
     private MotorbikeRepository motorbikeRepository;
     private Button btnAddBike, btnBack;
+    private Uri selectedImageUri;
+    private EditText currentEtImage;
+    private ImageView currentImgPreview;
+    private ActivityResultLauncher<Intent> imagePickerLauncher;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +55,20 @@ public class ManageBikesActivity extends AppCompatActivity {
 
         btnAddBike.setOnClickListener(v -> showAddBikeDialog());
         btnBack.setOnClickListener(v -> finish());
+
+        // Setup image picker launcher
+        imagePickerLauncher = registerForActivityResult(
+                new ActivityResultContracts.StartActivityForResult(),
+                result -> {
+                    if (result.getResultCode() == RESULT_OK && result.getData() != null) {
+                        selectedImageUri = result.getData().getData();
+                        if (selectedImageUri != null) {
+                            currentImgPreview.setImageURI(selectedImageUri);
+                            currentEtImage.setText(selectedImageUri.toString());
+                        }
+                    }
+                }
+        );
     }
 
     private void loadBikes() {
@@ -95,13 +117,32 @@ public class ManageBikesActivity extends AppCompatActivity {
         EditText etImage = view.findViewById(R.id.etBikeImage);
         ImageView imgPreview = view.findViewById(R.id.imgBikePreview);
         MaterialButton btnPreview = view.findViewById(R.id.btnPreviewImage);
+        MaterialButton btnChooseImage = view.findViewById(R.id.btnChooseImage);
 
-        // preview ảnh từ drawable
+        // Store for image picker callback
+        currentEtImage = etImage;
+        currentImgPreview = imgPreview;
+        selectedImageUri = null;
+
+        // Choose image from gallery
+        btnChooseImage.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("image/*");
+            imagePickerLauncher.launch(intent);
+        });
+
+        // preview ảnh từ drawable hoặc URI
         btnPreview.setOnClickListener(v -> {
             String imageName = etImage.getText().toString().trim();
 
             if (imageName.isEmpty()) {
-                etImage.setError("Nhập tên ảnh");
+                etImage.setError("Nhập tên ảnh hoặc chọn ảnh từ thư viện");
+                return;
+            }
+
+            if (imageName.startsWith("content://") || imageName.startsWith("file://")) {
+                imgPreview.setImageURI(Uri.parse(imageName));
                 return;
             }
 
@@ -127,10 +168,13 @@ public class ManageBikesActivity extends AppCompatActivity {
                 return;
             }
 
-            int resId = getResources().getIdentifier(image, "drawable", getPackageName());
-            if (resId == 0) {
-                Toast.makeText(this, "Tên ảnh không tồn tại", Toast.LENGTH_SHORT).show();
-                return;
+            // Check if image is from drawable or URI
+            if (!image.startsWith("content://") && !image.startsWith("file://")) {
+                int resId = getResources().getIdentifier(image, "drawable", getPackageName());
+                if (resId == 0) {
+                    Toast.makeText(this, "Tên ảnh không tồn tại", Toast.LENGTH_SHORT).show();
+                    return;
+                }
             }
 
             try {
@@ -167,6 +211,7 @@ public class ManageBikesActivity extends AppCompatActivity {
         EditText etImage = view.findViewById(R.id.etBikeImage);
         ImageView imgPreview = view.findViewById(R.id.imgBikePreview);
         MaterialButton btnPreview = view.findViewById(R.id.btnPreviewImage);
+        MaterialButton btnChooseImage = view.findViewById(R.id.btnChooseImage);
 
         // ================= LOAD BRAND =================
         BrandRepository brandRepository = new BrandRepository(this);
@@ -202,9 +247,33 @@ public class ManageBikesActivity extends AppCompatActivity {
 
         loadPreviewImage(imgPreview, bike.getImage());
 
+        // Store for image picker callback
+        currentEtImage = etImage;
+        currentImgPreview = imgPreview;
+        selectedImageUri = null;
+
+        // Choose image from gallery
+        btnChooseImage.setOnClickListener(v -> {
+            Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+            intent.addCategory(Intent.CATEGORY_OPENABLE);
+            intent.setType("image/*");
+            imagePickerLauncher.launch(intent);
+        });
+
         // ================= PREVIEW IMAGE =================
         btnPreview.setOnClickListener(v -> {
             String imageName = etImage.getText().toString().trim();
+
+            if (imageName.isEmpty()) {
+                etImage.setError("Nhập tên ảnh hoặc chọn ảnh từ thư viện");
+                return;
+            }
+
+            if (imageName.startsWith("content://") || imageName.startsWith("file://")) {
+                imgPreview.setImageURI(Uri.parse(imageName));
+                return;
+            }
+
             int resId = getResources().getIdentifier(imageName, "drawable", getPackageName());
 
             if (resId != 0) {

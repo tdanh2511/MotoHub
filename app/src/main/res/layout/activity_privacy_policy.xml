@@ -56,10 +56,10 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:lineSpacingExtra="4dp"
                 android:text="MotoHub tôn trọng quyền riêng tư của người dùng và cam kết bảo vệ thông tin cá nhân trong quá trình sử dụng ứng dụng."
                 android:textColor="#222222"
-                android:textSize="14sp"
-                android:lineSpacingExtra="4dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -67,17 +67,17 @@
                 android:layout_marginTop="14dp"
                 android:text="1. Thông tin được thu thập"
                 android:textColor="#D32F2F"
-                android:textStyle="bold"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:lineSpacingExtra="4dp"
                 android:text="MotoHub có thể thu thập các thông tin như tên đăng nhập, họ tên, số điện thoại, email, địa chỉ và dữ liệu liên quan đến tài khoản để phục vụ việc đăng nhập, quản lý hồ sơ và hỗ trợ khách hàng."
                 android:textColor="#444444"
-                android:textSize="14sp"
-                android:lineSpacingExtra="4dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -85,17 +85,17 @@
                 android:layout_marginTop="14dp"
                 android:text="2. Mục đích sử dụng"
                 android:textColor="#D32F2F"
-                android:textStyle="bold"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:lineSpacingExtra="4dp"
                 android:text="Thông tin cá nhân được sử dụng để xác thực tài khoản, hỗ trợ người dùng, cập nhật thông tin cá nhân, cải thiện trải nghiệm sử dụng ứng dụng và đảm bảo an toàn trong quá trình giao dịch."
                 android:textColor="#444444"
-                android:textSize="14sp"
-                android:lineSpacingExtra="4dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -103,17 +103,17 @@
                 android:layout_marginTop="14dp"
                 android:text="3. Phạm vi chia sẻ thông tin"
                 android:textColor="#D32F2F"
-                android:textStyle="bold"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:lineSpacingExtra="4dp"
                 android:text="MotoHub không tự ý bán, trao đổi hoặc chia sẻ thông tin cá nhân của người dùng cho bên thứ ba khi chưa có sự đồng ý, trừ trường hợp có yêu cầu từ cơ quan có thẩm quyền theo quy định pháp luật."
                 android:textColor="#444444"
-                android:textSize="14sp"
-                android:lineSpacingExtra="4dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -121,17 +121,17 @@
                 android:layout_marginTop="14dp"
                 android:text="4. Lưu trữ và bảo vệ dữ liệu"
                 android:textColor="#D32F2F"
-                android:textStyle="bold"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:lineSpacingExtra="4dp"
                 android:text="Thông tin người dùng được lưu trữ trong hệ thống nhằm phục vụ vận hành ứng dụng. MotoHub áp dụng các biện pháp hợp lý để hạn chế truy cập trái phép, mất mát hoặc sử dụng sai mục đích đối với dữ liệu cá nhân."
                 android:textColor="#444444"
-                android:textSize="14sp"
-                android:lineSpacingExtra="4dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -139,17 +139,17 @@
                 android:layout_marginTop="14dp"
                 android:text="5. Quyền của người dùng"
                 android:textColor="#D32F2F"
-                android:textStyle="bold"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:lineSpacingExtra="4dp"
                 android:text="Người dùng có quyền xem, chỉnh sửa và cập nhật thông tin cá nhân của mình trong ứng dụng. Khi cần hỗ trợ thêm, người dùng có thể liên hệ bộ phận chăm sóc khách hàng của MotoHub."
                 android:textColor="#444444"
-                android:textSize="14sp"
-                android:lineSpacingExtra="4dp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -157,17 +157,17 @@
                 android:layout_marginTop="14dp"
                 android:text="6. Liên hệ hỗ trợ"
                 android:textColor="#D32F2F"
-                android:textStyle="bold"
-                android:textSize="15sp" />
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
+                android:lineSpacingExtra="4dp"
                 android:text="Nếu có thắc mắc liên quan đến quyền riêng tư và bảo mật thông tin, vui lòng liên hệ MotoHub qua hotline hoặc email hỗ trợ được cung cấp trong ứng dụng."
                 android:textColor="#444444"
-                android:textSize="14sp"
-                android:lineSpacingExtra="4dp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
     </LinearLayout>
