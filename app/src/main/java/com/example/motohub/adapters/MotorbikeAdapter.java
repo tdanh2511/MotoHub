@@ -1,6 +1,7 @@
 package com.example.motohub.adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,7 +142,7 @@ public class MotorbikeAdapter extends RecyclerView.Adapter<MotorbikeAdapter.Moto
 
         try {
             if (imageValue.startsWith("content://") || imageValue.startsWith("file://")) {
-                img.setImageURI(android.net.Uri.parse(imageValue));
+                img.setImageURI(Uri.parse(imageValue));
                 return;
             }
 

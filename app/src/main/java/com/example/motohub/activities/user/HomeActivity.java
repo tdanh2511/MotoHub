@@ -79,12 +79,10 @@ public class HomeActivity extends AppCompatActivity {
             if (id == R.id.nav_home) {
                 return true;
             } else if (id == R.id.nav_cart) {
-                Intent intent = new Intent(HomeActivity.this, CartActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(HomeActivity.this, CartActivity.class));
                 return true;
             } else if (id == R.id.nav_favorite) {
-                Intent intent = new Intent(HomeActivity.this, FavoritesActivity.class);
-                startActivity(intent);
+                startActivity(new Intent(HomeActivity.this, FavoritesActivity.class));
                 return true;
             } else if (id == R.id.nav_account) {
                 showAccountMenu();
@@ -140,6 +138,9 @@ public class HomeActivity extends AppCompatActivity {
         SharedPreferences prefs = getSharedPreferences("motohub_session", MODE_PRIVATE);
         prefs.edit().clear().apply();
         Toast.makeText(HomeActivity.this, "Đã đăng xuất", Toast.LENGTH_SHORT).show();
+        startActivity(new Intent(HomeActivity.this, LoginActivity.class));
+        finish();
+
     }
 
     @Override

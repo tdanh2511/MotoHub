@@ -3,6 +3,7 @@ package com.example.motohub.activities.admin;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import android.widget.Spinner;
 import com.example.motohub.models.Brand;
 import com.example.motohub.repository.BrandRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ManageBikesActivity extends AppCompatActivity {
@@ -92,7 +94,7 @@ public class ManageBikesActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Thêm xe mới");
 
-        android.view.View view = getLayoutInflater().inflate(R.layout.dialog_bike_form, null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_bike_form, null);
 
         EditText etName = view.findViewById(R.id.etBikeName);
         Spinner spinnerBrand = view.findViewById(R.id.spinnerBrand);
@@ -100,7 +102,7 @@ public class ManageBikesActivity extends AppCompatActivity {
         BrandRepository brandRepository = new BrandRepository(this);
         List<Brand> brandList = brandRepository.getAllBrands();
 
-        List<String> brandNames = new java.util.ArrayList<>();
+        List<String> brandNames = new ArrayList<>();
         for (Brand brand : brandList) {
             brandNames.add(brand.getName());
         }
@@ -203,7 +205,7 @@ public class ManageBikesActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Sửa thông tin xe");
 
-        android.view.View view = getLayoutInflater().inflate(R.layout.dialog_bike_form, null);
+        View view = getLayoutInflater().inflate(R.layout.dialog_bike_form, null);
 
         EditText etName = view.findViewById(R.id.etBikeName);
         Spinner spinnerBrand = view.findViewById(R.id.spinnerBrand);
